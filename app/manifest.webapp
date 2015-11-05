@@ -1,0 +1,21 @@
+{
+    "version": "0.1",
+    "name": "Orgunit",
+    "description": "My App is a Packaged App",
+    "launch_path": "app/index.html",
+    "icons": {
+        "16": "/img/icons/org-logo-16.png",
+        "48": "/img/icons/org-logo-48.png",
+        "128": "/img/icons/org-logo-128.png"
+    },
+    "developer": {
+        "name": "SimonAndBears",
+        "url": "https://github.com/simjes/dhis2-orgunit"
+    },
+    "default_locale": "en",
+    "activities": {
+        "dhis": {
+            "href": "*"
+        }
+    }
+}
