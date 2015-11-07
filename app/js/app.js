@@ -1,5 +1,5 @@
 angular.module('orgunitmanager', ['ui.router'])
-	.config(function ($stateProvider, $urlRouterProvider) {
+    .config(function ($stateProvider, $urlRouterProvider) {
         $urlRouterProvider.otherwise("/");
 
         $stateProvider
@@ -9,6 +9,6 @@ angular.module('orgunitmanager', ['ui.router'])
                 controller: 'homeCtrl'
             });
     })
-    .controller('homeCtrl', function($scope) {
-        
+    .controller('homeCtrl', function ($scope) {
+        jQuery('.button-collapse').sideNav();
     });
