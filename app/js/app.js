@@ -1,4 +1,5 @@
-angular.module('orgunitmanager', ['ui.router'])
+'use strict';
+ngular.module('orgunitmanager', ['ui.router', 'd2Menu'])
 	.config(function ($stateProvider, $urlRouterProvider) {
         $urlRouterProvider.otherwise("/");
 
