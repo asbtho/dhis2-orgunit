@@ -19,14 +19,12 @@
   "homepage": "https://github.com/simjes/dhis2-orgunit#readme",
   "dependencies": {
     "angular": "^1.4.7",
-    "hammerjs": "^2.0.4",
     "jquery": "^2.1.4",
     "materialize-css": "0.97.1",
     "ui-router": "0.2.15"
   },
   "devDependencies": {
     "live-server": "0.8.2",
-    "sass": "0.5.0",
-    "webpack": "^1.12.2"
+    "sass": "0.5.0"
   }
 }

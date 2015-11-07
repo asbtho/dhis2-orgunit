@@ -1,5 +1,0 @@
-require('./node_modules/jquery/dist/jquery.min.js')
-require('./node_modules/angular/angular.min.js')
-require('./node_modules/ui-router/release/angular-ui-router.min.js')
-require('./node_modules/hammerjs/src/hammer.js')
-require('./node_modules/materialize-css/dist/js/materialize.min.js')
