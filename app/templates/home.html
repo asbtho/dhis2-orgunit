@@ -1,16 +1,18 @@
-<div class="row" ng-init="initTabs()">
+<div class="row" ng-init="getContent()">
 	<div id="map-holder" class="col s12 m4">
-		sdad
+		map window
 	</div>
 	<div id="fill-content" class="col s12 m8">
 		<div class="row">
 			<div class="col s12">
 				<ul class="tabs">
 					<li class="tab col s6"><a href="#search-window">Search</a></li>
-					<li class="tab col s6"><a class="active" href="#add-window">Add new</a></li>
+					<li class="tab col s6"><a href="#add-window">Add/edit</a></li>
 				</ul>
 			</div>
-			<div id="search-window" class="col s12">search</div>
+			<div id="search-window" class="col s12">
+				<org-list data="data"></org-list>
+			</div>
 			<div id="add-window" class="col s12">add</div>
 		</div>
 	</div>
