@@ -1,6 +1,5 @@
-'use strict';
-ngular.module('orgunitmanager', ['ui.router', 'd2Menu'])
-	.config(function ($stateProvider, $urlRouterProvider) {
+angular.module('orgunitmanager', ['ui.router']) //'d2Menu'
+    .config(function ($stateProvider, $urlRouterProvider) {
         $urlRouterProvider.otherwise("/");
 
         $stateProvider
@@ -10,6 +9,10 @@ ngular.module('orgunitmanager', ['ui.router', 'd2Menu'])
                 controller: 'homeCtrl'
             });
     })
-    .controller('homeCtrl', function($scope) {
-        
+    .controller('homeCtrl', function ($scope) {
+        $scope.initTabs = function () {
+            console.log('lel');
+            angular.element('ul.tabs').tabs();
+            
+        }
     });
