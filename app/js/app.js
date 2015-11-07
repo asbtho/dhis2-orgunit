@@ -1,4 +1,4 @@
-angular.module('orgunitmanager', ['ui.router', 'orgunitmanager.orgList']) //'d2Menu'
+angular.module('orgunitmanager', ['ui.router', 'orgunitmanager.orgList'])
     .config(function ($stateProvider, $urlRouterProvider) {
         $urlRouterProvider.otherwise("/");
 
@@ -11,13 +11,17 @@ angular.module('orgunitmanager', ['ui.router', 'orgunitmanager.orgList']) //'d2M
     })
     .controller('homeCtrl', function ($scope, $http) {
         $scope.getContent = function () {
-            //angular.element('ul.tabs').tabs();
-            //angular.element('.collapsible').collapsible();
-            /*$http.get('api/organisationUnits.json').then(function (result) {
+            $http.get('').then(function (result) {
+                $scope.data = [
+                    { name: "tst1", content: "lorem stufstum" },
+                    { name: "tst2", content: "lorem stufs2tudsadsadam" },
+                    { name: "tst3", content: "lorem stuf312432442stum" }
+                ];
                 console.log(result);
+                $scope.$broadcast('dataloaded');
             }, function (error) {
                 console.log('error: ' + error);
-            });*/
+            });
         }
-        
+
     });
