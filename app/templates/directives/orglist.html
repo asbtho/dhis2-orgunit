@@ -1,10 +1,11 @@
 <div>
 	<input type="text" placeholder="Search">
 	<ul class="collapsible" data-collapsible="accordion">
-		<li ng-repeat="unit in data">
+		<li ng-repeat="unit in data" ng-click="getDetails(unit.href)">
 			<div class="collapsible-header">{{unit.name}}</div>
 			<div class="collapsible-body">
-				<p>tst</p>
+				<!-- directive? -->
+				<p>Name: {{unit.name}}, Short name: {{unitDetails.shortName}}, Description: , Code: {{unitDetails.code}}</p>
 			</div>
 		</li>
 	</ul>

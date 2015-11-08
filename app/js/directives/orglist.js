@@ -13,7 +13,16 @@ angular.module('orgunitmanager.orgList', [])
                         angular.element('ul.tabs').tabs();
                         angular.element('.collapsible').collapsible();
                     }, 0, false);
-                })
+                });
+            },
+            controller: function ($scope, $http) {
+                $scope.getDetails = function (unitLink) {
+                    $http.get(unitLink).then(function (result) {
+                        $scope.unitDetails = result;
+                    }, function (error) {
+                        console.log(error);
+                    });
+                }
             }
         };
     });
