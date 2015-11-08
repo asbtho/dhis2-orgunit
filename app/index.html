@@ -7,6 +7,26 @@
 </head>
 
 <body ng-app="orgunitmanager">
+	<!--============= NAVBAR =============-->
+	<nav>
+		<div class="nav-wrapper">
+			<a href="#!" class="brand-logo">Logo</a>
+			<a href="#" data-activates="mobile-demo" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+			<ul class="right hide-on-med-and-down">
+				<li><a href="#">Sass</a></li>
+				<li><a href="#">Components</a></li>
+				<li><a href="#">Javascript</a></li>
+				<li><a href="#">Mobile</a></li>
+			</ul>
+			<ul class="side-nav" id="mobile-demo">
+				<li><a href="#">Sass</a></li>
+				<li><a href="#">Components</a></li>
+				<li><a href="#">Javascript</a></li>
+				<li><a href="#">Mobile</a></li>
+			</ul>
+		</div>
+	</nav>
+	<!--============= END NAVBAR =============-->
 	<div ui-view></div>
 
 	<script src="js/jquery.min.js"></script>
