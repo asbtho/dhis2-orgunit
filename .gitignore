@@ -33,3 +33,6 @@ typings
 
 ### VisualStudioCode ###
 .settings
+
+# Ignoring app.zip file #
+app.zip
