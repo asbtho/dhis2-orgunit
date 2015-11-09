@@ -34,3 +34,5 @@ typings
 ### VisualStudioCode ###
 .settings
 
+# Deployment .zip file #
+app.zip
