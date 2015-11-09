@@ -10,9 +10,9 @@ angular.module('orgunitmanager')
 		getOrgunits();
 
 		function getOrgunits() {
-			console.log('i am being called');
 			orgfactory.getOrgunits()
 				.success(function (result) {
+					console.log();
 					$scope.orgunits = result.data.organisationUnits;
 					$scope.$broadcast('orgunitsloaded');
 				})

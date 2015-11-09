@@ -2,13 +2,9 @@ angular.module('orgunitmanager')
 	.factory('orgfactory', ['$http', function ($http) {		
 		
 		//Not sure how to fetch the Url so i put it in as static.
-		var urlBase = "https://apps.dhis2.org/demo/api"; 
-		
-		
-		/*$http.get('manifest.webapp').then(function (result) {
+		var urlBase = $http.get('manifest.webapp').then(function (result) {
 			return result.data.activities.dhis.href + "/api";
 		});
-		*/
 		var orgfactory = {};
 		
 		
