@@ -19,6 +19,7 @@ angular.module('orgunitmanager.orgList', [])
                 $scope.getDetails = function (unitLink) {
                     $http.get(unitLink).then(function (result) {
                         $scope.unitDetails = result;
+                        console.log(result);
                     }, function (error) {
                         console.log(error);
                     });
