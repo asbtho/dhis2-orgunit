@@ -34,7 +34,5 @@ typings
 ### VisualStudioCode ###
 .settings
 
-# Ignoring app.zip file #
-app.zip
-
+# Ignoring .zip files #
 *.zip
