@@ -1,39 +1,26 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="orgunitmanager">
 
 <head>
 	<link href="style/materialize.min.css" rel="stylesheet">
 	<link href="style/style.css" rel="stylesheet">
 </head>
-
-<body ng-app="orgunitmanager">
-	<!--============= NAVBAR =============-->
+<body>
 	<nav>
-		<div class="nav-wrapper">
-			<a href="#!" class="brand-logo">Logo</a>
-			<a href="#" data-activates="mobile-demo" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
-			<ul class="right hide-on-med-and-down">
-				<li><a href="#">Sass</a></li>
-				<li><a href="#">Components</a></li>
-				<li><a href="#">Javascript</a></li>
-				<li><a href="#">Mobile</a></li>
-			</ul>
-			<ul class="side-nav" id="mobile-demo">
-				<li><a href="#">Sass</a></li>
-				<li><a href="#">Components</a></li>
-				<li><a href="#">Javascript</a></li>
-				<li><a href="#">Mobile</a></li>
-			</ul>
+		<div class="nav-wrapper blue">
+			<a href="#" class="brand-logo">dhis2 - org unit</a>
 		</div>
 	</nav>
-	<!--============= END NAVBAR =============-->
+
 	<div ui-view></div>
 
 	<script src="js/jquery.min.js"></script>
 	<script src="js/angular.min.js"></script>
 	<script src="js/angular-ui-router.min.js"></script>
 	<script src="js/materialize.min.js"></script>
+	<script src="js/directives/orglist.js"></script>
 	<script src="js/app.js"></script>
+
 </body>
 
 </html>

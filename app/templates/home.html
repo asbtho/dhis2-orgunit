@@ -1,13 +1,19 @@
-<!--
-##Testing factories with web api##
--->
-<div class="row">
-	<form class="col s12">
+<div class="row" ng-init="getContent()">
+	<div id="map-holder" class="col s12 m4">
+		map window
+	</div>
+	<div id="fill-content" class="col s12 m8">
 		<div class="row">
-			<div class="input-field col s12">
-				<input id="email" type="email" class="validate">
-				<label for="email" data-error="wrong" data-success="right">Email</label>
+			<div class="col s12">
+				<ul class="tabs">
+					<li class="tab col s6"><a href="#search-window">Search</a></li>
+					<li class="tab col s6"><a href="#add-window">Add/edit</a></li>
+				</ul>
 			</div>
+			<div id="search-window" class="col s12">
+				<org-list data="data"></org-list>
+			</div>
+			<div id="add-window" class="col s12">add</div>
 		</div>
-	</form>
+	</div>
 </div>
