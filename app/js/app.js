@@ -6,9 +6,43 @@ angular.module('orgunitmanager', ['ui.router', 'orgunitmanager.orgList'])
             .state('home', {
                 url: '/',
                 templateUrl: 'templates/home.html',
-                controller: 'homeCtrl'
+                controller: 'orgunitCtrl'
             });
     })
+    .controller('orgunitCtrl', ['$scope', 'orgfactory', function ($scope, orgfactory) {
+
+        $scope.status;
+        $scope.orgunits;
+        $scope.orgdetails;
+
+        getOrgunits();
+
+        function getOrgunits() {
+            orgfactory.getOrgunits()
+                .success(function (result) {
+                    $scope.orgunits = result.data.organisationUnits;
+                })
+                .error(function (error) {
+                    $scope.status = 'Unable to get organization units: ' + error.message;
+                });
+        }
+
+        function getOrgDetails() {
+            orgfactory.getOrgDetails()
+                .success(function (result) {
+                    $scope.orgdetails = result.data.organisationUnit;
+                })
+                .error(function (error) {
+                    $scope.status = 'Unable to get organization unit details: ' + error.message;
+                });
+        }
+
+    }]);
+    
+    
+    
+    
+    /*
     .controller('homeCtrl', function ($scope, $http) {
         $scope.getContent = function () {
             //link fix
@@ -21,3 +55,5 @@ angular.module('orgunitmanager', ['ui.router', 'orgunitmanager.orgList'])
             });
         }
     });
+    */
+    
