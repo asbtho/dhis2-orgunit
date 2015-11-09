@@ -18,7 +18,6 @@ angular.module('orgunitmanager', ['ui.router', 'orgunitmanager.orgList'])
                 
                 $http.get(apiBaseUrl + '/organisationUnits.json').then(function (result) {
                     $scope.data = result.data.organisationUnits;
-                    console.log(result);
                     $scope.$broadcast('orgunitsloaded');
                 }, function (error) {
                     console.log(error);
