@@ -36,3 +36,5 @@ typings
 
 # Ignoring app.zip file #
 app.zip
+
+*.zip
