@@ -35,4 +35,4 @@ typings
 .settings
 
 # Deployment .zip file #
-*.zip
+app/app.zip
