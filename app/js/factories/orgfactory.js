@@ -1,7 +1,14 @@
-angular.module('orgunitmanager.orgList')
-	.factory('orgfactory', ['$http', function ($http) {
+angular.module('orgunitmanager')
+	.factory('orgfactory', ['$http', function ($http) {		
 		
-		var urlBase = angular.element.$location + '/api'; //What did simon use to get baseurl?
+		//Not sure how to fetch the Url so i put it in as static.
+		var urlBase = "https://apps.dhis2.org/demo/api"; 
+		
+		
+		/*$http.get('manifest.webapp').then(function (result) {
+			return result.data.activities.dhis.href + "/api";
+		});
+		*/
 		var orgfactory = {};
 		
 		
@@ -15,6 +22,6 @@ angular.module('orgunitmanager.orgList')
 		orgfactory.getOrgDetails = function (id) {
 			return $http.get(urlBase + '/organisationUnits/' + id + '.json');
 		}
-		
+
 		return orgfactory;
 	}]);
