@@ -1,3 +1,5 @@
+var apiBaseUrl = "";
+
 angular.module('orgunitmanager', ['ui.router', 'orgunitmanager.orgList'])
     .config(function ($stateProvider, $urlRouterProvider) {
         $urlRouterProvider.otherwise("/");
@@ -45,14 +47,20 @@ angular.module('orgunitmanager', ['ui.router', 'orgunitmanager.orgList'])
     /*
     .controller('homeCtrl', function ($scope, $http) {
         $scope.getContent = function () {
-            //link fix
-            $http.get('https://apps.dhis2.org/demo/api/organisationUnits.json').then(function (result) {
-                $scope.data = result.data.organisationUnits;
-                console.log(result);
-                $scope.$broadcast('orgunitsloaded');
+            $http.get('manifest.webapp').then(function (result) {
+                apiBaseUrl = result.data.activities.dhis.href + "/api";
+                
+                $http.get(apiBaseUrl + '/organisationUnits.json').then(function (result) {
+                    $scope.data = result.data.organisationUnits;
+                    $scope.$broadcast('orgunitsloaded');
+                }, function (error) {
+                    console.log(error);
+                });
             }, function (error) {
                 console.log(error);
             });
+
+
         }
     });
     */
