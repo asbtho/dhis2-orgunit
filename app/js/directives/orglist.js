@@ -15,19 +15,10 @@ angular.module('orgunitmanager')
                 });
 
                 $scope.$on('orgunitsdetailsloaded', function () {
-                    console.log('test broadcast');
+                    $timeout(function () {
+                        console.log($scope.orgdetails.id);
+                    })
                 });
-            }/*,
-            controller: function ($scope, $http) {
-                $scope.getDetails = function (unitLink) {
-                    $http.get(unitLink).then(function (result) {
-                        $scope.unitDetails = result;
-                        $scope.$broadcast('orgunitsdetailsloaded');
-                    }, function (error) {
-                        console.log(error);
-                    });
-                }
             }
-            */
         };
     });
