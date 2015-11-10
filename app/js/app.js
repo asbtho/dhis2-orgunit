@@ -16,7 +16,7 @@ angular.module('orgunitmanager', ['ui.router', 'orgunitmanager.orgList'])
         $scope.getContent = function () {
             $http.get('manifest.webapp').then(function (result) {
                 apiBaseUrl = result.data.activities.dhis.href + "/api";
-                
+
                 $http.get(apiBaseUrl + '/organisationUnits.json').then(function (result) {
                     $scope.data = result.data.organisationUnits;
                     pageData.page1 = result.data.organisationUnits;
@@ -30,21 +30,21 @@ angular.module('orgunitmanager', ['ui.router', 'orgunitmanager.orgList'])
                 console.log(error);
             });
         }
-        
-        $scope.goToPage = function(page) {
+
+        $scope.goToPage = function (page) {
             $scope.activePage = page;
-            if (pageData.hasOwnProperty('page'+ page)) {
+            if (pageData.hasOwnProperty('page' + page)) {
                 $scope.data = pageData['page' + page];
-                console.log('contains');
+                $scope.$broadcast('orgunitsloaded');
             } else {
                 $http.get(apiBaseUrl + '/organisationUnits.json?page=' + page).then(function (result) {
                     $scope.data = result.data.organisationUnits;
                     pageData['page' + page] = result.data.organisationUnits;
+                    $scope.$broadcast('orgunitsloaded');
                 }, function (error) {
                     console.log(error);
                 });
             }
-            console.log('go to page: ' + page);
+            
         }
-
     });
