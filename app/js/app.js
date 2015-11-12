@@ -10,7 +10,6 @@ angular.module('orgunitmanager', ['ui.router'])
             });
     });
     
-    
     /*
     .controller('homeCtrl', function ($scope, $http) {
         $scope.getContent = function () {

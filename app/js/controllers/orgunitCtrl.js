@@ -3,7 +3,8 @@ angular.module('orgunitmanager')
 		
 		//Enabling tabs in home
 		angular.element('ul.tabs').tabs();
-
+		accordion: false;
+		
 		$scope.orgunits;
 		$scope.orgdetails;
 
@@ -13,7 +14,7 @@ angular.module('orgunitmanager')
 			orgfactory.getOrgunits()
 				.success(function (result) {
 					console.log('Orgunits Loaded');
-					$scope.orgunits = result.data.organisationUnits;
+					$scope.orgunits = result.organisationUnits;
 					$scope.$broadcast('orgunitsloaded');
 				})
 				.error(function (error) {
@@ -21,11 +22,12 @@ angular.module('orgunitmanager')
 				});
 		}
 
-		function getOrgDetails(id) {
+		$scope.getOrgDetails = function getOrgDetails(id) {
+			console.log(id);
 			orgfactory.getOrgDetails(id)
 				.success(function (result) {
-					//Depending how the result.data works and which details we want.
-					$scope.orgdetails = result.data;
+					//Depending how the result works and which details we want.
+					$scope.orgdetails = result;
 					$scope.$broadcast('orgunitsdetailsloaded');
 				})
 				.error(function (error) {
