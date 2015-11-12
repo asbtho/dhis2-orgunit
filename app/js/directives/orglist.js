@@ -12,11 +12,12 @@ angular.module('orgunitmanager')
                     $timeout(function () {
                         angular.element('.collapsible').collapsible();
                     }, 0, false);
+                    console.log('Orgunitsloaded and list made collapsible');
                 });
 
                 $scope.$on('orgunitsdetailsloaded', function () {
                     $timeout(function () {
-                        console.log($scope.orgdetails.id);
+                        console.log('orgunitsdetailsCalled' + $scope.orgdetails);
                     })
                 });
             }

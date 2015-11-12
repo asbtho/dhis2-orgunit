@@ -12,7 +12,7 @@ angular.module('orgunitmanager')
 		function getOrgunits() {
 			orgfactory.getOrgunits()
 				.success(function (result) {
-					console.log();
+					console.log('Orgunits Loaded');
 					$scope.orgunits = result.data.organisationUnits;
 					$scope.$broadcast('orgunitsloaded');
 				})
@@ -25,7 +25,7 @@ angular.module('orgunitmanager')
 			orgfactory.getOrgDetails(id)
 				.success(function (result) {
 					//Depending how the result.data works and which details we want.
-					$scope.orgdetails = result.data.dataSets;
+					$scope.orgdetails = result.data;
 					$scope.$broadcast('orgunitsdetailsloaded');
 				})
 				.error(function (error) {
