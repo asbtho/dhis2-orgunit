@@ -6,9 +6,28 @@ angular.module('orgunitmanager', ['ui.router'])
             .state('home', {
                 url: '/',
                 templateUrl: 'templates/home.html',
-                controller: 'homeCtrl'
+                controller: 'orgunitCtrl'
             });
-    })
-    .controller('homeCtrl', function ($scope) {
-        jQuery('.button-collapse').sideNav();
     });
+    
+    /*
+    .controller('homeCtrl', function ($scope, $http) {
+        $scope.getContent = function () {
+            $http.get('manifest.webapp').then(function (result) {
+                apiBaseUrl = result.data.activities.dhis.href + "/api";
+                
+                $http.get(apiBaseUrl + '/organisationUnits.json').then(function (result) {
+                    $scope.data = result.data.organisationUnits;
+                    $scope.$broadcast('orgunitsloaded');
+                }, function (error) {
+                    console.log(error);
+                });
+            }, function (error) {
+                console.log(error);
+            });
+
+
+        }
+    });
+    */
+    

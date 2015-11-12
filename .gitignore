@@ -34,3 +34,5 @@ typings
 ### VisualStudioCode ###
 .settings
 
+# Ignoring .zip files #
+*.zip

@@ -1,12 +1,17 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="orgunitmanager">
 
 <head>
 	<link href="style/materialize.min.css" rel="stylesheet">
 	<link href="style/style.css" rel="stylesheet">
 </head>
+<body>
+	<nav>
+		<div class="nav-wrapper blue">
+			<a href="#" class="brand-logo">dhis2 - org unit</a>
+		</div>
+	</nav>
 
-<body ng-app="orgunitmanager">
 	<div ui-view></div>
 
 	<script src="js/jquery.min.js"></script>
@@ -14,6 +19,9 @@
 	<script src="js/angular-ui-router.min.js"></script>
 	<script src="js/materialize.min.js"></script>
 	<script src="js/app.js"></script>
+	<script src="js/controllers/orgunitCtrl.js"></script>
+	<script src="js/directives/orglist.js"></script>
+	<script src="js/factories/orgfactory.js"></script>
 </body>
 
 </html>

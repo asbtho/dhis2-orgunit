@@ -1,0 +1,16 @@
+<div>
+	<input type="text" placeholder="Search">
+	<ul class="collapsible" data-collapsible="accordion">
+		<li ng-repeat="unit in orgunits" ng-click="getOrgDetails(unit.id)">
+			<div class="collapsible-header">{{ unit.name }}</div>
+			<div class="collapsible-body">
+				<!-- directive? -->
+				<p>
+					Opening Date: {{ orgdetails.openingDate | date }},
+					<br> District: {{ orgdetails.parent.name }},
+					<br> Unit Code: {{ orgdetails.code }}
+				</p>
+			</div>
+		</li>
+	</ul>
+</div>

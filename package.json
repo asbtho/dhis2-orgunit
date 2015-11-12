@@ -4,7 +4,7 @@
   "description": "Group project in INF5750",
   "main": "index.js",
   "scripts": {
-    "start": "live-server --open=app/index.html"
+    "start": "live-server --open=app"
   },
   "repository": {
     "type": "git",
