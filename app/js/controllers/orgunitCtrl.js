@@ -14,6 +14,7 @@ angular.module('orgunitmanager')
 		getOrgunits();
 
 		var pageData = {};
+		var currentDetails;
 
 		function getOrgunits() {
 			orgfactory.getOrgunits()
@@ -31,16 +32,20 @@ angular.module('orgunitmanager')
 		}
 
 		$scope.getOrgDetails = function getOrgDetails(id) {
-			console.log(id);
-			orgfactory.getOrgDetails(id)
-				.success(function (result) {
-					//Depending how the result works and which details we want.
-					$scope.orgdetails = result;
-					$scope.$broadcast('orgunitsdetailsloaded');
-				})
-				.error(function (error) {
-					console.log('Unable to get organization unit details: ' + error);
-				});
+			if (currentDetails != id) {
+				console.log(id);
+				orgfactory.getOrgDetails(id)
+					.success(function (result) {
+						//Depending how the result works and which details we want.
+						$scope.orgdetails = result;
+						$scope.$broadcast('orgunitsdetailsloaded');
+					})
+					.error(function (error) {
+						console.log('Unable to get organization unit details: ' + error);
+					});
+			} else {
+				console.log('Closing details');
+			}
 		};
 		
 		// Simjes pagenation - Merging
@@ -50,13 +55,15 @@ angular.module('orgunitmanager')
                 $scope.orgunits = pageData['page' + page];
                 $scope.$broadcast('orgunitsloaded');
             } else {
-                $http.get(apiBaseUrl + '/organisationUnits.json?page=' + page).then(function (result) {
-                    $scope.orgunits = result.organisationUnits;
-                    pageData['page' + page] = result.organisationUnits;
-                    $scope.$broadcast('orgunitsloaded');
-                }, function (error) {
-                    console.log(error);
-                });
+                orgfactory.getPageUnits(page)
+					.success(function (result) {
+						$scope.orgunits = result.organisationUnits;
+						pageData['page' + page] = result.organisationUnits;
+						$scope.$broadcast('orgunitsloaded');
+					})
+					.error(function (error) {
+						console.log('Pagination fucked up: ' + error);
+					})
             }
         }
 	}]);
