@@ -5,14 +5,14 @@ angular.module('orgunitmanager')
 		
 		// This should work, but apparently not??!?
 		/*$http.get('manifest.webapp').then(function (result) {
-			return result.data.activities.dhis.href + "/api";
+			return result.activities.dhis.href + "/api";
 		});
 		*/
 		var orgfactory = {};
 		
 		
 		// This should return .json file of organisationUnits
-		orgfactory.getOrgunits = function () {
+		orgfactory.getOrgUnits = function () {
 			return $http.get(urlBase + "/organisationUnits.json");
 		}
 		
@@ -20,6 +20,10 @@ angular.module('orgunitmanager')
 		// via the id referenced in the .json file from above function
 		orgfactory.getOrgDetails = function (id) {
 			return $http.get(urlBase + '/organisationUnits/' + id + '.json');
+		}
+		
+		orgfactory.getPageUnits = function(page) {
+			return $http.get(urlBase + '/organisationUnits.json?page=' + page)
 		}
 
 		return orgfactory;
