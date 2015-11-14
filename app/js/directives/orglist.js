@@ -3,8 +3,6 @@ angular.module('orgunitmanager')
         return { 
             replace: true,
             templateUrl: "templates/directives/orglist.html",
-            // Replaced parameter name with e
-            // Because i read that calling it scope might overwrite it??
             link: function ($scope) {
                 $scope.$on('orgunitsloaded', function () {
                     $timeout(function () {

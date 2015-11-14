@@ -2,12 +2,14 @@ angular.module('orgunitmanager')
 	.factory('orgfactory', ['$http', function ($http) {		
 		
 		//Not sure how to fetch the Url so i put it in as static.
-		var urlBase = "https://play.dhis2.org/demo/api"; 
+		var urlBase = $http.get('manifest.webapp').then(function (result) {
+			return result.activities.dhis.href + "/api";
+		}); 
+		
+		//"https://play.dhis2.org/demo/api"; 
 		
 		
-		/*$http.get('manifest.webapp').then(function (result) {
-			return result.data.activities.dhis.href + "/api";
-		});
+		/*
 		*/
 		var orgfactory = {};
 		
@@ -21,6 +23,10 @@ angular.module('orgunitmanager')
 		// via the id referenced in the .json file from above function
 		orgfactory.getOrgDetails = function (id) {
 			return $http.get(urlBase + '/organisationUnits/' + id + '.json');
+		}
+		
+		orgfactory.getpageUnits = function(page) {
+			return $http.get(urlBase + '/organisationUnits.json?page=' + page)
 		}
 
 		return orgfactory;

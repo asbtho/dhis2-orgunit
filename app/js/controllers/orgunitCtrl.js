@@ -13,7 +13,6 @@ angular.module('orgunitmanager')
 		// Fetching organisation units on document ready
 		getOrgunits();
 
-		var apiBaseUrl = "";
 		var pageData = {};
 
 		function getOrgunits() {
@@ -21,6 +20,9 @@ angular.module('orgunitmanager')
 				.success(function (result) {
 					console.log('Orgunits Loaded');
 					$scope.orgunits = result.organisationUnits;
+					pageData.page1 = result.organisationUnits;
+                    $scope.numberOfPages = new Array(result.pager.pageCount);
+                    $scope.activePage = 1;
 					$scope.$broadcast('orgunitsloaded');
 				})
 				.error(function (error) {
@@ -45,12 +47,12 @@ angular.module('orgunitmanager')
         $scope.goToPage = function (page) {
             $scope.activePage = page;
             if (pageData.hasOwnProperty('page' + page)) {
-                $scope.data = pageData['page' + page];
+                $scope.orgunits = pageData['page' + page];
                 $scope.$broadcast('orgunitsloaded');
             } else {
                 $http.get(apiBaseUrl + '/organisationUnits.json?page=' + page).then(function (result) {
-                    $scope.data = result.data.organisationUnits;
-                    pageData['page' + page] = result.data.organisationUnits;
+                    $scope.orgunits = result.organisationUnits;
+                    pageData['page' + page] = result.organisationUnits;
                     $scope.$broadcast('orgunitsloaded');
                 }, function (error) {
                     console.log(error);
