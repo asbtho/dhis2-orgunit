@@ -13,7 +13,7 @@ angular.module('orgunitmanager')
 		
 		
 		// This should return .json file of organisationUnits
-		orgfactory.getOrgunits = function () {
+		orgfactory.getOrgUnits = function () {
 			return $http.get(urlBase + "/organisationUnits.json");
 		}
 		
@@ -23,7 +23,7 @@ angular.module('orgunitmanager')
 			return $http.get(urlBase + '/organisationUnits/' + id + '.json');
 		}
 		
-		orgfactory.getpageUnits = function(page) {
+		orgfactory.getPageUnits = function(page) {
 			return $http.get(urlBase + '/organisationUnits.json?page=' + page)
 		}
 

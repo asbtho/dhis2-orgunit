@@ -17,7 +17,7 @@ angular.module('orgunitmanager')
 		var currentDetails;
 
 		function getOrgunits() {
-			orgfactory.getOrgunits()
+			orgfactory.getOrgUnits()
 				.success(function (result) {
 					console.log('Orgunits Loaded');
 					$scope.orgunits = result.organisationUnits;
@@ -34,6 +34,7 @@ angular.module('orgunitmanager')
 		$scope.getOrgDetails = function getOrgDetails(id) {
 			if (currentDetails != id) {
 				console.log(id);
+				currentDetails = id;
 				orgfactory.getOrgDetails(id)
 					.success(function (result) {
 						//Depending how the result works and which details we want.
