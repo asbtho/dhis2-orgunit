@@ -12,6 +12,10 @@
 			</div>
 			<div id="search-window" class="col s12">
 				<org-list data="orgunits"></org-list>
+				<!-- Simjes pagination merging -->
+				<ul class="pagination right">
+					<li ng-class="($index + 1) == activePage ? 'active' : 'waves-effect'" ng-repeat="page in numberOfPages track by $index" ng-click="goToPage($index + 1)"><a href="#!">{{$index + 1}}</a></li>
+				</ul>
 			</div>
 			<div id="add-window" class="col s12">add</div>
 		</div>
