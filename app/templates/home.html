@@ -14,12 +14,41 @@
 				<org-list data="orgunits"></org-list>
 				<!-- Simjes pagination merging -->
 				<ul class="pagination right">
-					<li ng-class="($index + 1) == activePage ? 'active' : 'waves-effect'" ng-repeat="page in numberOfPages track by $index" ng-click="goToPage($index + 1)">
+					<li ng-class="($index + 1) == activePage ? 'active' : 'waves-effect'" ng-repeat="page in numberOfPages track by $index" ng-click="goToPage($index + 1)">¨
+						<!-- id to page? -->
 						<a href="#!">{{$index + 1}}</a>
 					</li>
 				</ul>
 			</div>
-			<div id="add-window" class="col s12">add</div>
+			<div id="add-window" class="col s12">
+				<h3 id="addHeader">Add unit</h3>
+				<div class="row">
+					<form class="col s12">
+						<div class="row">
+							<div class="input-field col s12 m6">
+								<input id="org_name" type="text">
+								<label for="org_name">Name</label>
+							</div>
+							<div class="input-field col s12 m6">
+								<input id="short_name" type="text">
+								<label for="short_name">Short Name</label>
+							</div>
+							<div class="input-field col s12 m6">
+								<input id="org_description" type="text">
+								<label for="org_description">Description</label>
+							</div>
+							<div class="input-field col s12 m6">
+								<input id="org_code" type="text">
+								<label for="org_code">Code</label>
+							</div>
+							<div class="col s12">
+								<label for="org_opening_date">Opening Date</label>
+								<input id="org_opening_date" type="date" class="datepicker">
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>

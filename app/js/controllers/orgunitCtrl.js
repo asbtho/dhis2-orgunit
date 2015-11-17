@@ -3,9 +3,10 @@ angular.module('orgunitmanager')
 		
 		//Enabling tabs in home
 		angular.element('ul.tabs').tabs();
-		// Angular site said to usually
-		// set this to false, unsure why/what.
-		accordion: false;
+		angular.element('.datepicker').pickadate({
+			selectMonths: true, // Creates a dropdown to control month
+			selectYears: 15 // Creates a dropdown of 15 years to control year
+		});
 
 		$scope.orgunits;
 		$scope.orgdetails;
@@ -15,7 +16,7 @@ angular.module('orgunitmanager')
 
 		var pageData = {};
 		var currentDetails;
-
+		
 		function getOrgunits() {
 			orgfactory.getOrgUnits()
 				.success(function (result) {
@@ -39,7 +40,6 @@ angular.module('orgunitmanager')
 					.success(function (result) {
 						//Depending how the result works and which details we want.
 						$scope.orgdetails = result;
-						$scope.$broadcast('orgunitsdetailsloaded');
 					})
 					.error(function (error) {
 						console.log('Unable to get organization unit details: ' + error);

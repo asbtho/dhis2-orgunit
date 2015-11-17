@@ -1,6 +1,6 @@
 angular.module('orgunitmanager')
     .directive('orgList', function ($timeout) {
-        return { 
+        return {
             replace: true,
             templateUrl: "templates/directives/orglist.html",
             link: function ($scope) {
@@ -10,13 +10,6 @@ angular.module('orgunitmanager')
                     }, 0, false);
                     console.log('Orgunitsloaded and list made collapsible');
                 });
-                /*
-                $scope.$on('orgunitsdetailsloaded', function () {
-                    $timeout(function () {
-                        
-                    })
-                });
-                */
             }
         };
     });
