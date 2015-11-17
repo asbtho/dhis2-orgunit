@@ -21,10 +21,12 @@
 				</ul>
 			</div>
 			<div id="add-window" class="col s12">
-				<h3 id="addHeader">Add unit</h3>
+				<h5 id="addHeader" class="center">Add unit</h5>
 				<div class="row">
+					<!-- ngform? -->
 					<form class="col s12">
 						<div class="row">
+							<h6>Details</h6>
 							<div class="input-field col s12 m6">
 								<input id="org_name" type="text">
 								<label for="org_name">Name</label>
@@ -33,19 +35,57 @@
 								<input id="short_name" type="text">
 								<label for="short_name">Short Name</label>
 							</div>
-							<div class="input-field col s12 m6">
-								<input id="org_description" type="text">
+							<div class="input-field col s12">
+								<textarea id="org_description" class="materialize-textarea"></textarea>
 								<label for="org_description">Description</label>
 							</div>
 							<div class="input-field col s12 m6">
 								<input id="org_code" type="text">
 								<label for="org_code">Code</label>
 							</div>
+							<div class="input-field col s12 m6">
+								<input id="org_url" type="text">
+								<label for="org_url">URL</label>
+							</div>
+
+							<div class="input-field col s12">
+								<textarea id="org_comment" class="materialize-textarea"></textarea>
+								<label for="org_comment">Comment</label>
+							</div>
+							<div class="input-field col s12 m6">
+								<input id="org_longitude" type="text">
+								<label for="org_longitude">Longitude</label>
+							</div>
+							<div class="input-field col s12 m6">
+								<input id="org_latitude" type="text">
+								<label for="org_latitude">Latitude</label>
+							</div>
 							<div class="col s12">
 								<label for="org_opening_date">Opening Date</label>
 								<input id="org_opening_date" type="date" class="datepicker">
 							</div>
 						</div>
+						<div class="row">
+							<h6>Contact information</h6>
+							<div class="input-field col s12 m6">
+								<input id="org_contact_person" type="text">
+								<label for="org_contact_person">Contact person</label>
+							</div>
+							<div class="input-field col s12 m6">
+								<input id="contact_address" type="text">
+								<label for="contact_address">Address</label>
+							</div>
+							<div class="input-field col s12 m6">
+								<input id="contact_email" type="email" class="validate">
+								<label for="contact_email">Email</label>
+							</div>
+							<div class="input-field col s12 m6">
+								<input id="contact_phone" type="tel">
+								<label for="contact_phone">Phone number</label>
+							</div>
+						</div>
+						<a class="waves-effect waves-light btn">Add</a>
+						<a class="waves-effect waves-light btn">Cancel</a>
 					</form>
 				</div>
 			</div>
