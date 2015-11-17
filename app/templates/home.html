@@ -14,7 +14,7 @@
 				<org-list data="orgunits"></org-list>
 				<!-- Simjes pagination merging -->
 				<ul class="pagination right">
-					<li ng-class="($index + 1) == activePage ? 'active' : 'waves-effect'" ng-repeat="page in numberOfPages track by $index" ng-click="goToPage($index + 1)">¨
+					<li ng-class="($index + 1) == activePage ? 'active' : 'waves-effect'" ng-repeat="page in numberOfPages track by $index" ng-click="goToPage($index + 1)">
 						<!-- id to page? -->
 						<a href="#!">{{$index + 1}}</a>
 					</li>
@@ -84,8 +84,8 @@
 								<label for="contact_phone">Phone number</label>
 							</div>
 						</div>
-						<a class="waves-effect waves-light btn">Add</a>
-						<a class="waves-effect waves-light btn">Cancel</a>
+						<button class="btn waves-effect waves-light" type="submit" name="add_org_unit">Add</button>
+						<button class="btn waves-effect waves-light" type="submit" name="cancel_add_org_unit">Cancel</button>
 					</form>
 				</div>
 			</div>
