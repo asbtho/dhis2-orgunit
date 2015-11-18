@@ -2,7 +2,7 @@ var urlBase = "";
 
 angular.module('orgunitmanager')
 	.controller('orgunitCtrl', ['$scope', 'orgfactory', '$http', function ($scope, orgfactory, $http) {
-		
+
 		$scope.newOrg = {};
 		
 		//Enabling tabs in home
@@ -11,10 +11,6 @@ angular.module('orgunitmanager')
 			selectMonths: true, // Creates a dropdown to control month
 			selectYears: 15 // Creates a dropdown of 15 years to control year
 		});
-
-		//????????????????
-		//$scope.orgunits;
-		//$scope.orgdetails;
 		
 		// Fetching base url + organisation units on document ready
 		getBaseUrl();
@@ -44,6 +40,7 @@ angular.module('orgunitmanager')
 				});
 		}
 
+		//save details on click? probably not necessary		
 		$scope.getOrgDetails = function getOrgDetails(id) {
 			if (currentDetails != id) {
 				console.log(id);
@@ -98,13 +95,13 @@ angular.module('orgunitmanager')
 				contactPhone: $scope.newOrg.contactPhone*/
 			};
 			console.log($scope.newOrg.openingDate);
-			
+
 			orgfactory.addOrgUnit(newUnitAsJSON)
 				.success(function (result) {
-					//good  enough reload?
 					getOrgunits();
 					$scope.newOrg = {};
-					//feedback on success/fail
+					angular.element('ul.tabs').tabs('select_tab', 'search-window');
+					Materialize.toast('Success', 4000);
 				});
 		}
 	}]);
