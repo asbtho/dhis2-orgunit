@@ -1,3 +1,5 @@
+var urlBase = "";
+
 angular.module('orgunitmanager')
 	.controller('orgunitCtrl', ['$scope', 'orgfactory', '$http', function ($scope, orgfactory, $http) {
 		
@@ -12,10 +14,17 @@ angular.module('orgunitmanager')
 		$scope.orgdetails;
 		
 		// Fetching organisation units on document ready
-		getOrgunits();
-
+		getBaseUrl();
+		
 		var pageData = {};
 		var currentDetails;
+		
+		function getBaseUrl() {
+			orgfactory.getBaseUrl().success(function (result) {
+				urlBase = result.activities.dhis.href + "/api";
+				getOrgunits();
+			});
+		}
 		
 		function getOrgunits() {
 			orgfactory.getOrgUnits()

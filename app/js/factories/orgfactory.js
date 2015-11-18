@@ -1,7 +1,7 @@
 angular.module('orgunitmanager')
 	.factory('orgfactory', ['$http', function ($http) {		
 		
-		var urlBase = "https://play.dhis2.org/demo/api"; 
+		//var urlBase = "https://play.dhis2.org/demo/api"; 
 		
 		// This should work, but apparently not??!?
 		/*$http.get('../manifest.webapp').then(function (result) {
@@ -10,6 +10,9 @@ angular.module('orgunitmanager')
 		
 		var orgfactory = {};
 		
+		orgfactory.getBaseUrl = function () {
+			return $http.get('manifest.webapp');
+		}
 		
 		// This should return .json file of organisationUnits
 		orgfactory.getOrgUnits = function () {
