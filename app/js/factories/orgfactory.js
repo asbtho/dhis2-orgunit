@@ -1,13 +1,6 @@
 angular.module('orgunitmanager')
 	.factory('orgfactory', ['$http', function ($http) {		
 		
-		//var urlBase = "https://play.dhis2.org/demo/api"; 
-		
-		// This should work, but apparently not??!?
-		/*$http.get('../manifest.webapp').then(function (result) {
-			return result.activities.dhis.href + "/api";
-		});*/
-		
 		var orgfactory = {};
 		
 		orgfactory.getBaseUrl = function () {

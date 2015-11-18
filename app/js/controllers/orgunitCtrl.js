@@ -3,6 +3,8 @@ var urlBase = "";
 angular.module('orgunitmanager')
 	.controller('orgunitCtrl', ['$scope', 'orgfactory', '$http', function ($scope, orgfactory, $http) {
 		
+		$scope.newOrg = {};
+		
 		//Enabling tabs in home
 		angular.element('ul.tabs').tabs();
 		angular.element('.datepicker').pickadate({
@@ -79,21 +81,30 @@ angular.module('orgunitmanager')
         }
 
 		$scope.addNewUnit = function () {
-			console.log('adding unit');
-			var tst = {
-				code: "OU_651071",
-				name: "Adonkia CHP",
-				shortName: "Adonkia CHP",
-				openingDate: "2010-01-01",
-				description: "lel",
-				comment: "stuff",
-				longitude: "233",
-				latitude: "553",
-				href: "lel.com"
+			var newUnitAsJSON = {
+				code: $scope.newOrg.code,
+				name: $scope.newOrg.name,
+				shortName: $scope.newOrg.shortName,
+				openingDate: "2010-01-01",//$scope.newOrg.openingDate,
+				description: $scope.newOrg.description,
+				comment: $scope.newOrg.comment,
+				longitude: $scope.newOrg.longitude,
+				latitude: $scope.newOrg.latitude,
+				url: "" //$scope.newOrg.url
+				/*
+				contactPerson: $scope.newOrg.contactPerson,
+				contactAddress: $scope.newOrg.contactAddress,
+				contactEmail: $scope.newOrg.contactEmail,
+				contactPhone: $scope.newOrg.contactPhone*/
 			};
-			orgfactory.addOrgUnit(tst)
+			console.log($scope.newOrg.openingDate);
+			
+			orgfactory.addOrgUnit(newUnitAsJSON)
 				.success(function (result) {
-					console.log(result);
+					//good  enough reload?
+					getOrgunits();
+					$scope.newOrg = {};
+					//feedback on success/fail
 				});
 		}
 	}]);
