@@ -9,7 +9,8 @@ angular.module('orgunitmanager')
 		angular.element('ul.tabs').tabs();
 		angular.element('.datepicker').pickadate({
 			selectMonths: true, // Creates a dropdown to control month
-			selectYears: 15 // Creates a dropdown of 15 years to control year
+			selectYears: 15, // Creates a dropdown of 15 years to control year
+			format: 'yyyy-mm-dd'
 		});
 		
 		// Fetching base url + organisation units on document ready
@@ -82,7 +83,7 @@ angular.module('orgunitmanager')
 				code: $scope.newOrg.code,
 				name: $scope.newOrg.name,
 				shortName: $scope.newOrg.shortName,
-				openingDate: "2010-01-01",//$scope.newOrg.openingDate,
+				openingDate: $scope.newOrg.openingDate,
 				description: $scope.newOrg.description,
 				comment: $scope.newOrg.comment,
 				longitude: $scope.newOrg.longitude,
