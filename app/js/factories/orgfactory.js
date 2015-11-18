@@ -26,11 +26,11 @@ angular.module('orgunitmanager')
 		}
 		
 		orgfactory.getPageUnits = function(page) {
-			return $http.get(urlBase + '/organisationUnits.json?page=' + page)
+			return $http.get(urlBase + '/organisationUnits.json?page=' + page);
 		}
 		
-		orgfactory.addOrgUnit = function() {
-			
+		orgfactory.addOrgUnit = function(newOrgUnit) {
+			return $http.post(urlBase + '/organisationUnits', newOrgUnit);
 		}
 
 		return orgfactory;

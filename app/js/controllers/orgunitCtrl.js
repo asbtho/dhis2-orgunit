@@ -10,22 +10,23 @@ angular.module('orgunitmanager')
 			selectYears: 15 // Creates a dropdown of 15 years to control year
 		});
 
-		$scope.orgunits;
-		$scope.orgdetails;
+		//????????????????
+		//$scope.orgunits;
+		//$scope.orgdetails;
 		
-		// Fetching organisation units on document ready
+		// Fetching base url + organisation units on document ready
 		getBaseUrl();
-		
+
 		var pageData = {};
 		var currentDetails;
-		
+
 		function getBaseUrl() {
 			orgfactory.getBaseUrl().success(function (result) {
 				urlBase = result.activities.dhis.href + "/api";
 				getOrgunits();
 			});
 		}
-		
+
 		function getOrgunits() {
 			orgfactory.getOrgUnits()
 				.success(function (result) {
@@ -73,7 +74,26 @@ angular.module('orgunitmanager')
 					})
 					.error(function (error) {
 						console.log('Pagination fucked up: ' + error);
-					})
+					});
             }
         }
+
+		$scope.addNewUnit = function () {
+			console.log('adding unit');
+			var tst = {
+				code: "OU_651071",
+				name: "Adonkia CHP",
+				shortName: "Adonkia CHP",
+				openingDate: "2010-01-01",
+				description: "lel",
+				comment: "stuff",
+				longitude: "233",
+				latitude: "553",
+				href: "lel.com"
+			};
+			orgfactory.addOrgUnit(tst)
+				.success(function (result) {
+					console.log(result);
+				});
+		}
 	}]);
