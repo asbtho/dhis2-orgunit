@@ -4,6 +4,8 @@ angular.module('orgunitmanager')
 	.controller('orgunitCtrl', ['$scope', 'orgfactory', '$http', function ($scope, orgfactory, $http, uiGmapGoogleMapApi) {
 
 		$scope.newOrg = {};
+		
+		//temporary map values for google maps
 		$scope.map = { center: { latitude: 45, longitude: -73 }, zoom: 8 };
 		
 		//Enabling tabs in home
