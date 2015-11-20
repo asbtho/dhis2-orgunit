@@ -1,9 +1,10 @@
 angular.module('orgunitmanager', ['ui.router'])
     .config(function ($stateProvider, $urlRouterProvider) {
-        $urlRouterProvider.otherwise("/");
+        $urlRouterProvider.otherwise("search");
         $stateProvider
             .state('home', {
                 url: '/',
+                abstract: true,
                 templateUrl: 'templates/home.html',
                 controller: 'orgunitCtrl'
             })
@@ -21,7 +22,7 @@ angular.module('orgunitmanager', ['ui.router'])
                 views: {
                     'add-tab': {
                         templateUrl: 'templates/addUnitTab.html',
-                        controller: 'orgunitCtrl'
+                        controller: 'addUnitCtrl'
                     }
                 }
             })
@@ -30,7 +31,7 @@ angular.module('orgunitmanager', ['ui.router'])
                 views: {
                     'search-tab': {
                         templateUrl: 'templates/editUnitTab.html',
-                        controller: 'orgunitCtrl'
+                        controller: 'editUnitCtrl'
                     }
                 }
             });

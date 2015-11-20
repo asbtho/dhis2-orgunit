@@ -2,17 +2,10 @@ var urlBase = "";
 
 angular.module('orgunitmanager')
 	.controller('orgunitCtrl', ['$scope', 'orgfactory', '$http', '$state', function ($scope, orgfactory, $http, $state) {
-
-		$scope.newOrg = {};
-		
+				
 		//Enabling tabs in home
 		angular.element('ul.tabs').tabs();
-		angular.element('.datepicker').pickadate({
-			selectMonths: true, // Creates a dropdown to control month
-			selectYears: 15, // Creates a dropdown of 15 years to control year
-			format: 'yyyy-mm-dd'
-		});
-		
+				
 		// Fetching base url + organisation units on document ready
 		getBaseUrl();
 
@@ -83,32 +76,7 @@ angular.module('orgunitmanager')
             }
         }
 
-		$scope.addNewUnit = function () {
-			var newUnitAsJSON = {
-				code: $scope.newOrg.code,
-				name: $scope.newOrg.name,
-				shortName: $scope.newOrg.shortName,
-				openingDate: $scope.newOrg.openingDate,
-				description: $scope.newOrg.description,
-				comment: $scope.newOrg.comment,
-				longitude: $scope.newOrg.longitude,
-				latitude: $scope.newOrg.latitude,
-				url: "" //$scope.newOrg.url
-				/*
-				contactPerson: $scope.newOrg.contactPerson,
-				contactAddress: $scope.newOrg.contactAddress,
-				contactEmail: $scope.newOrg.contactEmail,
-				contactPhone: $scope.newOrg.contactPhone*/
-			};
-
-			orgfactory.addOrgUnit(newUnitAsJSON)
-				.success(function (result) {
-					getOrgunits();
-					$scope.newOrg = {};
-					angular.element('ul.tabs').tabs('select_tab', 'search-window');
-					Materialize.toast('Success', 4000);
-				});
-		}
+		
 
 		$scope.editOrgDetails = function (currentDetails) {
 			$state.go('home.edit');
