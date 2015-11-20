@@ -29,12 +29,7 @@ angular.module('orgunitmanager')
 
 			orgfactory.addOrgUnit(newUnitAsJSON)
 				.success(function (result) {
-					
 					$scope.newOrg = {};
-					//----- broken -----
-					//$state.go('home.search');
-					//angular.element('ul.tabs').tabs('select_tab', 'search-window');
-					//----- broken -----
 					Materialize.toast('Success', 4000); 
 				});
 		}
