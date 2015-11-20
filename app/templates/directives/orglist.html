@@ -28,12 +28,12 @@
 						</tr>
 						<tr>
 							<td><b>Last updated:</b> {{orgdetails.lastUpdated}}</td>
-							<td><b>Created by:</b> {{orgdetails.contactPerson}}???placeholder???</td>
+							<td><b>Created by:</b> {{orgdetails.user.name}}</td>
 							<td><b>ID:</b> {{orgdetails.id}}</td>
 						</tr>
 						<tr>
 							<td><b>URL:</b> {{orgdetails.url}}</td>
-							<td colspan="2"><a class="waves-effect waves-light btn right">Edit</a></td>
+							<td colspan="2"><a class="waves-effect waves-light btn right teal" ng-click="editOrgDetails(orgdetails)">Edit</a></td>
 						</tr>
 					</tbody>
 				</table>

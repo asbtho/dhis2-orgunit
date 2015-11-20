@@ -105,4 +105,10 @@ angular.module('orgunitmanager')
 					Materialize.toast('Success', 4000);
 				});
 		}
+		
+		$scope.editOrgDetails = function (currentDetails) {
+			angular.element('ul.tabs').tabs('select_tab', 'add-window');
+			angular.element('#addHeader').text('Edit Unit');
+			console.log(currentDetails);
+		}
 	}]);
