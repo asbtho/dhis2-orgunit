@@ -1,12 +1,9 @@
 var urlBase = "";
 
 angular.module('orgunitmanager')
-	.controller('orgunitCtrl', ['$scope', 'orgfactory', '$http', function ($scope, orgfactory, $http, uiGmapGoogleMapApi) {
+	.controller('orgunitCtrl', ['$scope', 'orgfactory', '$http', function ($scope, orgfactory, $http) {
 
 		$scope.newOrg = {};
-		
-		//temporary map values for google maps
-		$scope.map = { center: { latitude: 45, longitude: -73 }, zoom: 8 };
 		
 		//Enabling tabs in home
 		angular.element('ul.tabs').tabs();
@@ -38,9 +35,6 @@ angular.module('orgunitmanager')
                     $scope.numberOfPages = new Array(result.pager.pageCount);
                     $scope.activePage = 1;
 					$scope.$broadcast('orgunitsloaded');
-					uiGmapGoogleMapApi.then(function(maps) {
-
-   					});
 				})
 				.error(function (error) {
 					console.log('Unable to fetch organization units: ' + error);
@@ -110,11 +104,10 @@ angular.module('orgunitmanager')
 					angular.element('ul.tabs').tabs('select_tab', 'search-window');
 					Materialize.toast('Success', 4000);
 				});
-			}
+		}
 			
-			
-			// uiGmapGoogleMapApi is a promise.
-    		// The "then" callback function provides the google.maps object.
+		// uiGmapGoogleMapApi is a promise.
+		// The "then" callback function provides the google.maps object.
 			
 			
 	}]);

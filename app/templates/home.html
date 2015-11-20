@@ -1,7 +1,15 @@
 <div class="row">
-	<div id="map-holder" class="col s12 m4">
-		Map Window
-		<ui-gmap-google-map center='map.center' zoom='map.zoom'></ui-gmap-google-map>
+	<div id="map-holder" ng-controller="googleMapsCtrl" class="col s12 m4">
+		<script type="text/ng-template" id="addNew.tpl.html">
+			<button class="btn btn-sm btn-primary" ng-click="addNewClick()">{{addNewText}}</button>
+		</script>
+		<script type="text/ng-template" id="findMe.tpl.html">
+			<button class="btn btn-sm btn-primary" ng-click="findMeClick()">{{findMeText}}</button>
+		</script>
+		<ui-gmap-google-map center="map.center" zoom="map.zoom" options="options">
+			<ui-gmap-map-control template="addNew.tpl.html" position="top-right" controller="googleMapsCtrl" index="-1"></ui-gmap-map-control>
+			<ui-gmap-map-control template="findMe.tpl.html" position="top-left" controller="googleMapsCtrl" index="-1"></ui-gmap-map-control>
+		</ui-gmap-google-map>
 	</div>
 	<div id="fill-content" class="col s12 m8">
 		<div class="row">
@@ -59,7 +67,7 @@
 								<label for="org_longitude">Longitude</label>
 							</div>
 							<div class="input-field col s12 m6">
-								<input id="org_latitude" type="text"  ng-model="newOrg.latitude">
+								<input id="org_latitude" type="text" ng-model="newOrg.latitude">
 								<label for="org_latitude">Latitude</label>
 							</div>
 							<div class="col s12">
@@ -79,7 +87,7 @@
 							</div>
 							<div class="input-field col s12 m6">
 								<!-- validate email? -->
-								<input id="contact_email" type="email"  ng-model="newOrg.contactEmail">
+								<input id="contact_email" type="email" ng-model="newOrg.contactEmail">
 								<label for="contact_email">Email</label>
 							</div>
 							<div class="input-field col s12 m6">
@@ -87,7 +95,7 @@
 								<label for="contact_phone">Phone number</label>
 							</div>
 						</div>
-						<button class="btn waves-effect waves-light" type="submit" name="add_org_unit"  ng-click="addNewUnit()">Add</button>
+						<button class="btn waves-effect waves-light" type="submit" name="add_org_unit" ng-click="addNewUnit()">Add</button>
 						<button class="btn waves-effect waves-light" type="submit" name="cancel_add_org_unit">Cancel</button>
 					</form>
 				</div>
