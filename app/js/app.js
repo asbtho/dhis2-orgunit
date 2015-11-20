@@ -28,6 +28,9 @@ angular.module('orgunitmanager', ['ui.router'])
             })
             .state('home.edit', {
                 url: 'edit',
+                params: {
+                    unitCurrentDetails: null
+                },
                 views: {
                     'search-tab': {
                         templateUrl: 'templates/editUnitTab.html',

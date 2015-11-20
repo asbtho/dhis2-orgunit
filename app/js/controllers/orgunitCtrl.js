@@ -1,7 +1,7 @@
 var urlBase = "";
 
 angular.module('orgunitmanager')
-	.controller('orgunitCtrl', ['$scope', 'orgfactory', '$http', '$state', function ($scope, orgfactory, $http, $state) {
+	.controller('orgunitCtrl', ['$scope', 'orgfactory', '$state', function ($scope, orgfactory, $state) {
 				
 		//Enabling tabs in home
 		angular.element('ul.tabs').tabs();
@@ -57,7 +57,7 @@ angular.module('orgunitmanager')
 			}
 		};
 		
-		// Simjes pagenation - Merging
+		// Simjes pagenation - Merging, needs fixing for saved data ???
         $scope.goToPage = function (page) {
             $scope.activePage = page;
             if (pageData.hasOwnProperty('page' + page)) {
@@ -76,10 +76,8 @@ angular.module('orgunitmanager')
             }
         }
 
-		
-
 		$scope.editOrgDetails = function (currentDetails) {
-			$state.go('home.edit');
+			$state.go('home.edit', {unitCurrentDetails: currentDetails});
 		}
 				
 		$scope.goToState = function (stateName) {

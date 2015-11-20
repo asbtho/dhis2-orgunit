@@ -1,5 +1,5 @@
 angular.module('orgunitmanager')
-	.controller('addUnitCtrl', ['$scope', 'orgfactory', '$http', function ($scope, orgfactory, $http) {
+	.controller('addUnitCtrl', ['$scope', 'orgfactory', function ($scope, orgfactory) {
 		
 		$scope.newOrg = {};
 		

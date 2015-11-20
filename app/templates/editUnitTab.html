@@ -1,68 +1,70 @@
-<h5 class="center">Edit unit</h5>
-<div class="row">
-	<!-- directive! ADD/EDIT better routing?? -->
-	<form class="col s12">
-		<div class="row">
-			<h6>Details</h6>
-			<div class="input-field col s12 m6">
-				<input id="org_name" type="text" ng-model="newOrg.name">
-				<label for="org_name">Name</label>
-			</div>
-			<div class="input-field col s12 m6">
-				<input id="short_name" type="text" ng-model="newOrg.shortName">
-				<label for="short_name">Short Name</label>
-			</div>
-			<div class="input-field col s12">
-				<textarea id="org_description" class="materialize-textarea" ng-model="newOrg.description"></textarea>
-				<label for="org_description">Description</label>
-			</div>
-			<div class="input-field col s12 m6">
-				<input id="org_code" type="text" ng-model="newOrg.code">
-				<label for="org_code">Code</label>
-			</div>
-			<div class="input-field col s12 m6">
-				<!-- validateion -->
-				<input id="org_url" type="text" ng-model="newOrg.url">
-				<label for="org_url">URL</label>
-			</div>
+<div ng-init="initEdit()">
+	<h5 class="center">Edit unit</h5>
+	<div class="row">
+		<!-- directive! ADD/EDIT better routing?? -->
+		<form class="col s12">
+			<div class="row">
+				<h6>Details</h6>
+				<div class="input-field col s12 m6">
+					<input id="org_name" type="text" ng-model="newOrg.name">
+					<label for="org_name">Name</label>
+				</div>
+				<div class="input-field col s12 m6">
+					<input id="short_name" type="text" ng-model="newOrg.shortName">
+					<label for="short_name">Short Name</label>
+				</div>
+				<div class="input-field col s12">
+					<textarea id="org_description" class="materialize-textarea" ng-model="newOrg.description"></textarea>
+					<label for="org_description">Description</label>
+				</div>
+				<div class="input-field col s12 m6">
+					<input id="org_code" type="text" ng-model="newOrg.code">
+					<label for="org_code">Code</label>
+				</div>
+				<div class="input-field col s12 m6">
+					<!-- validateion -->
+					<input id="org_url" type="text" ng-model="newOrg.url">
+					<label for="org_url">URL</label>
+				</div>
 
-			<div class="input-field col s12">
-				<textarea id="org_comment" class="materialize-textarea" ng-model="newOrg.comment"></textarea>
-				<label for="org_comment">Comment</label>
+				<div class="input-field col s12">
+					<textarea id="org_comment" class="materialize-textarea" ng-model="newOrg.comment"></textarea>
+					<label for="org_comment">Comment</label>
+				</div>
+				<div class="input-field col s12 m6">
+					<input id="org_longitude" type="text" ng-model="newOrg.longitude">
+					<label for="org_longitude">Longitude</label>
+				</div>
+				<div class="input-field col s12 m6">
+					<input id="org_latitude" type="text" ng-model="newOrg.latitude">
+					<label for="org_latitude">Latitude</label>
+				</div>
+				<div class="col s12">
+					<label for="org_opening_date">Opening Date</label>
+					<input id="org_opening_date" type="date" class="datepicker" ng-model="newOrg.openingDate">
+				</div>
 			</div>
-			<div class="input-field col s12 m6">
-				<input id="org_longitude" type="text" ng-model="newOrg.longitude">
-				<label for="org_longitude">Longitude</label>
+			<div class="row">
+				<h6>Contact information</h6>
+				<div class="input-field col s12 m6">
+					<input id="org_contact_person" type="text" ng-model="newOrg.contactPerson">
+					<label for="org_contact_person">Contact person</label>
+				</div>
+				<div class="input-field col s12 m6">
+					<input id="contact_address" type="text" ng-model="newOrg.contactAddress">
+					<label for="contact_address">Address</label>
+				</div>
+				<div class="input-field col s12 m6">
+					<!-- validate email? -->
+					<input id="contact_email" type="email" ng-model="newOrg.contactEmail">
+					<label for="contact_email">Email</label>
+				</div>
+				<div class="input-field col s12 m6">
+					<input id="contact_phone" type="tel" ng-model="newOrg.contactPhone">
+					<label for="contact_phone">Phone number</label>
+				</div>
 			</div>
-			<div class="input-field col s12 m6">
-				<input id="org_latitude" type="text" ng-model="newOrg.latitude">
-				<label for="org_latitude">Latitude</label>
-			</div>
-			<div class="col s12">
-				<label for="org_opening_date">Opening Date</label>
-				<input id="org_opening_date" type="date" class="datepicker" ng-model="newOrg.openingDate">
-			</div>
-		</div>
-		<div class="row">
-			<h6>Contact information</h6>
-			<div class="input-field col s12 m6">
-				<input id="org_contact_person" type="text" ng-model="newOrg.contactPerson">
-				<label for="org_contact_person">Contact person</label>
-			</div>
-			<div class="input-field col s12 m6">
-				<input id="contact_address" type="text" ng-model="newOrg.contactAddress">
-				<label for="contact_address">Address</label>
-			</div>
-			<div class="input-field col s12 m6">
-				<!-- validate email? -->
-				<input id="contact_email" type="email" ng-model="newOrg.contactEmail">
-				<label for="contact_email">Email</label>
-			</div>
-			<div class="input-field col s12 m6">
-				<input id="contact_phone" type="tel" ng-model="newOrg.contactPhone">
-				<label for="contact_phone">Phone number</label>
-			</div>
-		</div>
-		<button class="btn waves-effect waves-light" type="submit" name="add_org_unit" ng-click="addNewUnit()">Confirm</button>
-	</form>
+			<button class="btn waves-effect waves-light" type="submit" name="add_org_unit" ng-click="addNewUnit()">Confirm</button>
+		</form>
+	</div>
 </div>
