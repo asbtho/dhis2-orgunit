@@ -42,6 +42,10 @@ angular.module('orgunitmanager')
 				});
 		}
 
+		$scope.setInitState = function() {
+			$state.go('home.search');
+		}
+
 		//save details on click? probably not necessary		
 		$scope.getOrgDetails = function getOrgDetails(id) {
 			if (currentDetails != id) {
@@ -96,7 +100,6 @@ angular.module('orgunitmanager')
 				contactEmail: $scope.newOrg.contactEmail,
 				contactPhone: $scope.newOrg.contactPhone*/
 			};
-			console.log($scope.newOrg.openingDate);
 
 			orgfactory.addOrgUnit(newUnitAsJSON)
 				.success(function (result) {
@@ -110,11 +113,8 @@ angular.module('orgunitmanager')
 		$scope.editOrgDetails = function (currentDetails) {
 			$state.go('home.edit');
 		}
-		
-		
-		//fix stuff
-		
-		$scope.goTo = function (stateName) {
+				
+		$scope.goToState = function (stateName) {
 			switch (stateName) {
 				case 'search':
 					$state.go('home.search');
