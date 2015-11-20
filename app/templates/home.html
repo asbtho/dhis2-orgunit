@@ -6,90 +6,15 @@
 		<div class="row">
 			<div class="col s12">
 				<ul class="tabs">
-					<li class="tab col s6"><a href="#search-window">Search</a></li>
-					<li class="tab col s6"><a href="#add-window">Add/edit</a></li>
+					<li class="tab col s6"><a href="#search-window" ng-click="goTo('search')">Search</a></li>
+					<li class="tab col s6"><a href="#add-window" ng-click="goTo('add')">Add new</a></li>
 				</ul>
 			</div>
 			<div id="search-window" class="col s12">
-				<org-list data="orgunits"></org-list>
-				<!-- Simjes pagination merging -->
-				<ul class="pagination right">
-					<li ng-class="($index + 1) == activePage ? 'active' : 'waves-effect'" ng-repeat="page in numberOfPages track by $index" ng-click="goToPage($index + 1)">
-						<!-- id to page? -->
-						<a href="#!">{{$index + 1}}</a>
-					</li>
-				</ul>
+				<div ui-view name="search-tab"></div>
 			</div>
 			<div id="add-window" class="col s12">
-				<h5 id="addHeader" class="center">Add unit</h5>
-				<div class="row">
-					<!-- directive! ADD/EDIT better routing?? -->
-					<form class="col s12">
-						<div class="row">
-							<h6>Details</h6>
-							<div class="input-field col s12 m6">
-								<input id="org_name" type="text" ng-model="newOrg.name">
-								<label for="org_name">Name</label>
-							</div>
-							<div class="input-field col s12 m6">
-								<input id="short_name" type="text" ng-model="newOrg.shortName">
-								<label for="short_name">Short Name</label>
-							</div>
-							<div class="input-field col s12">
-								<textarea id="org_description" class="materialize-textarea" ng-model="newOrg.description"></textarea>
-								<label for="org_description">Description</label>
-							</div>
-							<div class="input-field col s12 m6">
-								<input id="org_code" type="text" ng-model="newOrg.code">
-								<label for="org_code">Code</label>
-							</div>
-							<div class="input-field col s12 m6">
-								<!-- validateion -->
-								<input id="org_url" type="text" ng-model="newOrg.url">
-								<label for="org_url">URL</label>
-							</div>
-
-							<div class="input-field col s12">
-								<textarea id="org_comment" class="materialize-textarea" ng-model="newOrg.comment"></textarea>
-								<label for="org_comment">Comment</label>
-							</div>
-							<div class="input-field col s12 m6">
-								<input id="org_longitude" type="text" ng-model="newOrg.longitude">
-								<label for="org_longitude">Longitude</label>
-							</div>
-							<div class="input-field col s12 m6">
-								<input id="org_latitude" type="text"  ng-model="newOrg.latitude">
-								<label for="org_latitude">Latitude</label>
-							</div>
-							<div class="col s12">
-								<label for="org_opening_date">Opening Date</label>
-								<input id="org_opening_date" type="date" class="datepicker" ng-model="newOrg.openingDate">
-							</div>
-						</div>
-						<div class="row">
-							<h6>Contact information</h6>
-							<div class="input-field col s12 m6">
-								<input id="org_contact_person" type="text" ng-model="newOrg.contactPerson">
-								<label for="org_contact_person">Contact person</label>
-							</div>
-							<div class="input-field col s12 m6">
-								<input id="contact_address" type="text" ng-model="newOrg.contactAddress">
-								<label for="contact_address">Address</label>
-							</div>
-							<div class="input-field col s12 m6">
-								<!-- validate email? -->
-								<input id="contact_email" type="email"  ng-model="newOrg.contactEmail">
-								<label for="contact_email">Email</label>
-							</div>
-							<div class="input-field col s12 m6">
-								<input id="contact_phone" type="tel" ng-model="newOrg.contactPhone">
-								<label for="contact_phone">Phone number</label>
-							</div>
-						</div>
-						<button class="btn waves-effect waves-light" type="submit" name="add_org_unit" ng-click="addNewUnit()">Confirm</button>
-						<button class="btn waves-effect waves-light" type="submit" name="cancel_add_org_unit">Cancel</button>
-					</form>
-				</div>
+				<div ui-view name="add-tab"></div>
 			</div>
 		</div>
 	</div>

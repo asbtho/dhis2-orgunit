@@ -1,7 +1,7 @@
 var urlBase = "";
 
 angular.module('orgunitmanager')
-	.controller('orgunitCtrl', ['$scope', 'orgfactory', '$http', function ($scope, orgfactory, $http) {
+	.controller('orgunitCtrl', ['$scope', 'orgfactory', '$http', '$state', function ($scope, orgfactory, $http, $state) {
 
 		$scope.newOrg = {};
 		
@@ -20,6 +20,7 @@ angular.module('orgunitmanager')
 		var currentDetails;
 
 		function getBaseUrl() {
+			
 			orgfactory.getBaseUrl().success(function (result) {
 				urlBase = result.activities.dhis.href + "/api";
 				getOrgunits();
@@ -105,10 +106,22 @@ angular.module('orgunitmanager')
 					Materialize.toast('Success', 4000);
 				});
 		}
-		
+
 		$scope.editOrgDetails = function (currentDetails) {
-			angular.element('ul.tabs').tabs('select_tab', 'add-window');
-			angular.element('#addHeader').text('Edit Unit');
-			console.log(currentDetails);
+			$state.go('home.edit');
+		}
+		
+		
+		//fix stuff
+		
+		$scope.goTo = function (stateName) {
+			switch (stateName) {
+				case 'search':
+					$state.go('home.search');
+					break;
+				case 'add':
+					$state.go('home.add');
+					break;
+			}
 		}
 	}]);
