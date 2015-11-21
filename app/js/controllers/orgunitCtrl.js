@@ -3,7 +3,6 @@ var urlBase = "";
 angular.module('orgunitmanager')
 	.controller('orgunitCtrl', ['$scope', 'orgfactory', '$state', function ($scope, orgfactory, $state) {
 				
-		//Enabling tabs in home
 		angular.element('ul.tabs').tabs();
 				
 		// Fetching base url + organisation units on document ready

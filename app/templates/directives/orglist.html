@@ -1,57 +1,74 @@
 <div>
-	<input type="text" placeholder="Search">
-	<ul class="collapsible" data-collapsible="accordion">
-		<li ng-repeat="unit in orgunits" ng-click="getOrgDetails(unit.id)">
-			<div class="collapsible-header">{{ unit.name }}</div>
-			<div class="collapsible-body">
-				<!-- directive? -->
-				<!-- table fungerer daarlig paa descirption og comments som kan vaere lang, ubrukelig: fixit
+	<div class="row">
+		<form>
+			<input type="text" placeholder="Search" class="col s12 m4">
+			<div class="input-field col s12 m4 offset-m4 right">
+				<select>
+					<!--  get list from db? laaso border options? -->
+					<option value="" selected>Choose level</option>
+					<option value="1">Chiefdom</option>
+					<option value="2">District</option>
+					<option value="3">Facility</option>
+					<option value="4">National</option>
+				</select>
+				<label>Level</label>
+			</div>
+		</form>
+	</div>
+	<div class="row">
+		<ul class="collapsible" data-collapsible="accordion">
+			<li ng-repeat="unit in orgunits" ng-click="getOrgDetails(unit.id)">
+				<div class="collapsible-header">{{ unit.name }}</div>
+				<div class="collapsible-body">
+					<!-- directive? -->
+					<!-- table fungerer daarlig paa descirption og comments som kan vaere lang, ubrukelig: fixit
 					contact  person and info? bruke materialize grid?
 				-->
-				<br>
-				<div class="row">
-					<div class="col s12 m4">
-						<b>Name:</b> {{orgdetails.name}}
-					</div>
-					<div class="col s12 m4">
-						<b>Short name:</b> {{orgdetails.shortName}}
-					</div>
-					<div class="col s12 m4">
-						<b>Code:</b> {{orgdetails.code}}
-					</div>
-					<div class="col s12">
-						<b>Description:</b> {{orgdetails.description}}
-					</div>
-					<div class="col s12 m4">
-						<b>Opening date:</b> {{orgdetails.openingDate}}
-					</div>
-					<div class="col s12 m4">
-						<b>Closed date:</b> {{orgdetails.closedDate}}
-					</div>
-					<div class="col s12 m4">
-						<b>Registers date:</b> {{orgdetails.registersDate}}
-						<!-- korrekt? -->
-					</div>
-					<div class="col s12">
-						<b>Comment:</b> {{orgdetails.comment}}
-					</div>
-					<div class="col s12 m4">
-						<b>Last updated:</b> {{orgdetails.lastUpdated}}
-					</div>
-					<div class="col s12 m4">
-						<b>Created by:</b> {{orgdetails.user.name}}
-					</div>
-					<div class="col s12 m4">
-						<b>ID:</b> {{orgdetails.id}}
-					</div>
-					<div class="col s12 m6">
-						<b>URL:</b> {{orgdetails.url}}
-					</div>
-					<div class="col s12 m6">
-						<a class="waves-effect waves-light btn right" ng-click="editOrgDetails(orgdetails)">Edit</a>
+					<br>
+					<div class="row">
+						<div class="col s12 m4">
+							<b>Name:</b> {{orgdetails.name}}
+						</div>
+						<div class="col s12 m4">
+							<b>Short name:</b> {{orgdetails.shortName}}
+						</div>
+						<div class="col s12 m4">
+							<b>Code:</b> {{orgdetails.code}}
+						</div>
+						<div class="col s12">
+							<b>Description:</b> {{orgdetails.description}}
+						</div>
+						<div class="col s12 m4">
+							<b>Opening date:</b> {{orgdetails.openingDate}}
+						</div>
+						<div class="col s12 m4">
+							<b>Closed date:</b> {{orgdetails.closedDate}}
+						</div>
+						<div class="col s12 m4">
+							<b>Registers date:</b> {{orgdetails.registersDate}}
+							<!-- korrekt? -->
+						</div>
+						<div class="col s12">
+							<b>Comment:</b> {{orgdetails.comment}}
+						</div>
+						<div class="col s12 m4">
+							<b>Last updated:</b> {{orgdetails.lastUpdated}}
+						</div>
+						<div class="col s12 m4">
+							<b>Created by:</b> {{orgdetails.user.name}}
+						</div>
+						<div class="col s12 m4">
+							<b>ID:</b> {{orgdetails.id}}
+						</div>
+						<div class="col s12 m6">
+							<b>URL:</b> {{orgdetails.url}}
+						</div>
+						<div class="col s12 m6">
+							<a class="waves-effect waves-light btn right" ng-click="editOrgDetails(orgdetails)">Edit</a>
+						</div>
 					</div>
 				</div>
-			</div>
-		</li>
-	</ul>
+			</li>
+		</ul>
+	</div>
 </div>
