@@ -30,10 +30,9 @@ angular.module('orgunitmanager')
 				$scope.numberOfPages = new Array(result.pager.pageCount);
 				$scope.activePage = 1;
 				$scope.$broadcast('orgunitsloaded');
-			})
-				.error(function (error) {
-					console.log('Unable to fetch organization units: ' + error);
-				});
+			}).error(function (error) {
+				console.log('Unable to fetch organization units: ' + error);
+			});
 
 			orgfactory.getLevels().success(function (result) {
 				console.log('leeeeeeeeevels test:');
@@ -109,24 +108,32 @@ angular.module('orgunitmanager')
 		}
 
 		$scope.getSearchResult = function () {
-			console.log('searching with phrase: ' + $scope.searchPhrase + ", level: " + $scope.selectedLevel + ", and group: " + $scope.selectedGroup);
+			//paging?--------------------------- og evt kun filtre uten searchstring?
 			var parameters = "";
 			if ($scope.searchPhrase === "") {
-				console.log("empty");
+				orgfactory.getOrgUnits().success(function (result) {
+					$scope.orgunits = result.organisationUnits;
+					pageData.page1 = result.organisationUnits;
+					$scope.numberOfPages = new Array(result.pager.pageCount);
+					$scope.activePage = 1;
+					$scope.$broadcast('orgunitsloaded');
+				}).error(function (error) {
+					console.log('Unable to fetch organization units: ' + error);
+				});
 			} else {
 				parameters += "filter=name:like:" + $scope.searchPhrase;
-				if($scope.selectedLevel) {
+				if ($scope.selectedLevel) {
 					parameters += "&filter=level:eq:" + $scope.selectedLevel;
 				}
-				if($scope.selectedGroup) {
-					parameters += "&filter=groups.id:eq:" + $scope.selectedGroup;
+				if ($scope.selectedGroup) {
+					parameters += "&filter=organisationUnitGroups.id:eq:" + $scope.selectedGroup;
 				}
 				orgfactory.getSearchResults(parameters).success(function (result) {
-					console.log(result);
+					$scope.orgunits = result.organisationUnits;
+					$scope.$broadcast('orgunitsloaded');
 				}).error(function (error) {
 					console.log(error);
 				});
 			}
-			console.log(parameters);
 		}
 	}]);

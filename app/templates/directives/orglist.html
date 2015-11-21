@@ -3,14 +3,14 @@
 		<form>
 			<input type="text" placeholder="Search" class="col s12" ng-change="getSearchResult()" ng-model="searchPhrase">
 			<div class="input-field col s12 m6">
-				<select ng-model="selectedLevel">
+				<select ng-model="selectedLevel" ng-change="getSearchResult()">
 					<option value="" selected>Choose level</option>
 					<option ng-repeat="level in orgLevels" value="{{level.level}}">{{level.name}}</option>
 				</select>
 				<label>Level</label>
 			</div>
 			<div class="input-field col s12 m6">
-				<select ng-model="selectedGroup">
+				<select ng-model="selectedGroup" ng-change="getSearchResult()">
 					<option value="" selected>Choose group</option>
 					<option ng-repeat="group in orgGroups" value="{{group.id}}">{{group.name}}</option>
 				</select>
