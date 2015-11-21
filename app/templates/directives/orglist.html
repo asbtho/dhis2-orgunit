@@ -1,18 +1,18 @@
 <div>
 	<div class="row">
 		<form>
-			<input type="text" placeholder="Search" class="col s12">
+			<input type="text" placeholder="Search" class="col s12" ng-change="testSearch()" ng-model="searchPhrase">
 			<div class="input-field col s12 m6">
-				<select>
+				<select ng-model="selectedLevel">
 					<option value="" selected>Choose level</option>
-					<option ng-repeat="level in orgLevels"value="{{level.id}}">{{level.name}}</option>
+					<option ng-repeat="level in orgLevels" value="{{level.id}}">{{level.name}}</option>
 				</select>
 				<label>Level</label>
 			</div>
 			<div class="input-field col s12 m6">
-				<select>
+				<select ng-model="selectedGroup">
 					<option value="" selected>Choose group</option>
-					<option ng-repeat="group in orgGroups"value="{{group.id}}">{{group.name}}</option>
+					<option ng-repeat="group in orgGroups" value="{{group.id}}">{{group.name}}</option>
 				</select>
 				<label>Group</label>
 			</div>
@@ -23,10 +23,6 @@
 			<li ng-repeat="unit in orgunits" ng-click="getOrgDetails(unit.id)">
 				<div class="collapsible-header">{{ unit.name }}</div>
 				<div class="collapsible-body">
-					<!-- directive? -->
-					<!-- table fungerer daarlig paa descirption og comments som kan vaere lang, ubrukelig: fixit
-					contact  person and info? bruke materialize grid?
-				-->
 					<br>
 					<div class="row">
 						<div class="col s12 m4">

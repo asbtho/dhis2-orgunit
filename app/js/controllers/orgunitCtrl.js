@@ -2,7 +2,7 @@ var urlBase = "";
 
 angular.module('orgunitmanager')
 	.controller('orgunitCtrl', ['$scope', 'orgfactory', '$state', function ($scope, orgfactory, $state) {
-		
+
 		$scope.orgLevels = {};
 		$scope.orgGroups = {};
 		
@@ -23,37 +23,36 @@ angular.module('orgunitmanager')
 		}
 
 		function populateSite() {
-			orgfactory.getOrgUnits()
-				.success(function (result) {
-					console.log('Orgunits Loaded');
-					$scope.orgunits = result.organisationUnits;
-					pageData.page1 = result.organisationUnits;
-                    $scope.numberOfPages = new Array(result.pager.pageCount);
-                    $scope.activePage = 1;
-					$scope.$broadcast('orgunitsloaded');
-				})
+			orgfactory.getOrgUnits().success(function (result) {
+				console.log('Orgunits Loaded');
+				$scope.orgunits = result.organisationUnits;
+				pageData.page1 = result.organisationUnits;
+				$scope.numberOfPages = new Array(result.pager.pageCount);
+				$scope.activePage = 1;
+				$scope.$broadcast('orgunitsloaded');
+			})
 				.error(function (error) {
 					console.log('Unable to fetch organization units: ' + error);
 				});
-				
+
 			orgfactory.getLevels().success(function (result) {
 				$scope.orgLevels = result.organisationUnitLevels;
 				$scope.$broadcast('orgLevelsAndGroupsLoaded');
 			})
-			.error (function (error) {
-				console.log(error);
-			});
-			
+				.error(function (error) {
+					console.log(error);
+				});
+
 			orgfactory.getGroups().success(function (result) {
 				$scope.orgGroups = result.organisationUnitGroups;
 				$scope.$broadcast('orgLevelsAndGroupsLoaded');
 			})
-			.error (function (error) {
-				console.log(error);
-			});
-		}
+				.error(function (error) {
+					console.log(error);
+				});
+		}		
 
-		$scope.setInitState = function() {
+		$scope.setInitState = function () {
 			$state.go('home.search');
 		}
 
@@ -92,9 +91,9 @@ angular.module('orgunitmanager')
         }
 
 		$scope.editOrgDetails = function (currentDetails) {
-			$state.go('home.edit', {unitCurrentDetails: currentDetails});
+			$state.go('home.edit', { unitCurrentDetails: currentDetails });
 		}
-				
+
 		$scope.goToState = function (stateName) {
 			switch (stateName) {
 				case 'search':
@@ -104,5 +103,9 @@ angular.module('orgunitmanager')
 					$state.go('home.add');
 					break;
 			}
+		}
+		
+		$scope.testSearch = function () {
+			console.log('searching with phrase: ' + $scope.searchPhrase + ", level: " + $scope.selectedLevel + ", and group: " + $scope.selectedGroup);
 		}
 	}]);
