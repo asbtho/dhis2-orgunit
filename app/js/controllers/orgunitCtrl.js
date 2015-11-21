@@ -118,6 +118,9 @@ angular.module('orgunitmanager')
 				if($scope.selectedLevel) {
 					parameters += "&filter=level:eq:" + $scope.selectedLevel;
 				}
+				if($scope.selectedGroup) {
+					parameters += "&filter=groups.id:eq:" + $scope.selectedGroup;
+				}
 				orgfactory.getSearchResults(parameters).success(function (result) {
 					console.log(result);
 				}).error(function (error) {
