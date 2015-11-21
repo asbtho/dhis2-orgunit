@@ -1,5 +1,5 @@
 angular.module('orgunitmanager')
-	.controller('editUnitCtrl', ['$scope', 'orgfactory', '$stateParams', function ($scope, orgfactory, $stateParams) {
+	.controller('editUnitCtrl', ['$scope', 'orgfactory', '$stateParams', '$state', function ($scope, orgfactory, $stateParams, $state) {
 
 		$scope.unitToEdit = {};
 
@@ -24,21 +24,20 @@ angular.module('orgunitmanager')
 				shortName: $scope.unitToEdit.shortName,
 				description: $scope.unitToEdit.description,
 				comment: $scope.unitToEdit.comment,
+				url: $scope.unitToEdit.url,
 				openingDate: $scope.unitToEdit.openingDate,
 				closedDate: $scope.unitToEdit.closedDate,
-				
-				/*
 				contactPerson: $scope.unitToEdit.contactPerson,
-				contactAddress: $scope.unitToEdit.contactAddress,
-				contactEmail: $scope.unitToEdit.contactEmail,
-				contactPhone: $scope.unitToEdit.contactPhone*/
+				address: $scope.unitToEdit.address,
+				email: $scope.unitToEdit.email,
+				phoneNumber: $scope.unitToEdit.phoneNumber
 			}
 
 			orgfactory.editOrgUnit($scope.unitToEdit.id, editUnitAsJSON)
 				.success(function (result) {
-					console.log(result);
+					$scope.unitToEdit = {};
+					$state.go('home.search');
 					Materialize.toast('Success', 4000);
 				});
 		}
-
 	}]);

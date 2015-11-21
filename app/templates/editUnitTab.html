@@ -29,9 +29,6 @@
 					<label for="org_comment">Comment</label>
 				</div>
 				<div class="col s12 m6">
-					
-					
-					<!-- ng-model date problems -->
 					<label for="org_opening_date">Opening Date</label>
 					<input id="org_opening_date" type="date" class="datepicker" ng-model="unitToEdit.openingDate">
 				</div>
@@ -39,9 +36,6 @@
 					<label for="org_closed_date">Closed Date</label>
 					<input id="org_closed_date" type="date" class="datepicker" ng-model="unitToEdit.closedDate">
 				</div>
-				
-				
-				
 			</div>
 			<div class="row">
 				<h6>Contact information</h6>
@@ -50,16 +44,16 @@
 					<label for="org_contact_person">Contact person</label>
 				</div>
 				<div class="input-field col s12 m6">
-					<input id="contact_address" type="text" ng-model="unitToEdit.contactAddress">
+					<input id="contact_address" type="text" ng-model="unitToEdit.address">
 					<label for="contact_address">Address</label>
 				</div>
 				<div class="input-field col s12 m6">
 					<!-- validate email? -->
-					<input id="contact_email" type="email" ng-model="unitToEdit.contactEmail">
+					<input id="contact_email" type="email" ng-model="unitToEdit.email">
 					<label for="contact_email">Email</label>
 				</div>
 				<div class="input-field col s12 m6">
-					<input id="contact_phone" type="tel" ng-model="unitToEdit.contactPhone">
+					<input id="contact_phone" type="tel" ng-model="unitToEdit.phoneNumber">
 					<label for="contact_phone">Phone number</label>
 				</div>
 			</div>

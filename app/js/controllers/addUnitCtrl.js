@@ -19,12 +19,11 @@ angular.module('orgunitmanager')
 				comment: $scope.newOrg.comment,
 				longitude: $scope.newOrg.longitude,
 				latitude: $scope.newOrg.latitude,
-				url: "" //$scope.newOrg.url
-				/*
+				url: $scope.newOrg.url,
 				contactPerson: $scope.newOrg.contactPerson,
-				contactAddress: $scope.newOrg.contactAddress,
-				contactEmail: $scope.newOrg.contactEmail,
-				contactPhone: $scope.newOrg.contactPhone*/
+				address: $scope.newOrg.contactAddress,
+				email: $scope.newOrg.contactEmail,
+				phoneNumber: $scope.newOrg.contactPhone
 			};
 
 			orgfactory.addOrgUnit(newUnitAsJSON)
