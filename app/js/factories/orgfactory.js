@@ -9,6 +9,7 @@ angular.module('orgunitmanager')
 		
 		// This should return .json file of organisationUnits
 		orgfactory.getOrgUnits = function () {
+			//include long og lati for insta markers på map?
 			return $http.get(urlBase + "/organisationUnits.json");
 		}
 		
@@ -31,11 +32,15 @@ angular.module('orgunitmanager')
 		}
 		
 		orgfactory.getLevels = function () {
-			return $http.get(urlBase + '/organisationUnitLevels.json');
+			return $http.get(urlBase + '/organisationUnitLevels.json?fields=name,level');
 		}
 		
 		orgfactory.getGroups = function () {
 			return $http.get(urlBase + '/organisationUnitGroups.json');
+		}
+		
+		orgfactory.getSearchResults = function (parameters) {
+			return $http.get(urlBase + '/organisationUnits.json?' + parameters);
 		}
 
 		return orgfactory;

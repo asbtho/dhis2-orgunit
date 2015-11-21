@@ -36,6 +36,8 @@ angular.module('orgunitmanager')
 				});
 
 			orgfactory.getLevels().success(function (result) {
+				console.log('leeeeeeeeevels test:');
+				console.log(result);
 				$scope.orgLevels = result.organisationUnitLevels;
 				$scope.$broadcast('orgLevelsAndGroupsLoaded');
 			})
@@ -50,7 +52,7 @@ angular.module('orgunitmanager')
 				.error(function (error) {
 					console.log(error);
 				});
-		}		
+		}
 
 		$scope.setInitState = function () {
 			$state.go('home.search');
@@ -72,6 +74,7 @@ angular.module('orgunitmanager')
 		};
 		
 		// Simjes pagenation - Merging, needs fixing for saved data ??? also choose # of items on each page, dynamic paging
+		// not save pages?
         $scope.goToPage = function (page) {
             $scope.activePage = page;
             if (pageData.hasOwnProperty('page' + page)) {
@@ -85,7 +88,7 @@ angular.module('orgunitmanager')
 						$scope.$broadcast('orgunitsloaded');
 					})
 					.error(function (error) {
-						console.log('Pagination fucked up: ' + error);
+						console.log(error);
 					});
             }
         }
@@ -104,8 +107,23 @@ angular.module('orgunitmanager')
 					break;
 			}
 		}
-		
-		$scope.testSearch = function () {
+
+		$scope.getSearchResult = function () {
 			console.log('searching with phrase: ' + $scope.searchPhrase + ", level: " + $scope.selectedLevel + ", and group: " + $scope.selectedGroup);
+			var parameters = "";
+			if ($scope.searchPhrase === "") {
+				console.log("empty");
+			} else {
+				parameters += "filter=name:like:" + $scope.searchPhrase;
+				if($scope.selectedLevel) {
+					parameters += "&filter=level:eq:" + $scope.selectedLevel;
+				}
+				orgfactory.getSearchResults(parameters).success(function (result) {
+					console.log(result);
+				}).error(function (error) {
+					console.log(error);
+				});
+			}
+			console.log(parameters);
 		}
 	}]);

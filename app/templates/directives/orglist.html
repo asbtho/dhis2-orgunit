@@ -1,11 +1,11 @@
 <div>
 	<div class="row">
 		<form>
-			<input type="text" placeholder="Search" class="col s12" ng-change="testSearch()" ng-model="searchPhrase">
+			<input type="text" placeholder="Search" class="col s12" ng-change="getSearchResult()" ng-model="searchPhrase">
 			<div class="input-field col s12 m6">
 				<select ng-model="selectedLevel">
 					<option value="" selected>Choose level</option>
-					<option ng-repeat="level in orgLevels" value="{{level.id}}">{{level.name}}</option>
+					<option ng-repeat="level in orgLevels" value="{{level.level}}">{{level.name}}</option>
 				</select>
 				<label>Level</label>
 			</div>
