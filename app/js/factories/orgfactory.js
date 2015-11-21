@@ -29,6 +29,14 @@ angular.module('orgunitmanager')
 		orgfactory.editOrgUnit = function (id, editOrgUnit) {
 			return $http.patch(urlBase + '/organisationUnits/' + id , editOrgUnit);
 		}
+		
+		orgfactory.getLevels = function () {
+			return $http.get(urlBase + '/organisationUnitLevels.json');
+		}
+		
+		orgfactory.getGroups = function () {
+			return $http.get(urlBase + '/organisationUnitGroups.json');
+		}
 
 		return orgfactory;
 	}]);

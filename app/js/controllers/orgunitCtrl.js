@@ -2,7 +2,11 @@ var urlBase = "";
 
 angular.module('orgunitmanager')
 	.controller('orgunitCtrl', ['$scope', 'orgfactory', '$state', function ($scope, orgfactory, $state) {
-				
+		
+		$scope.orgLevels = {};
+		$scope.orgGroups = {};
+		
+		//flytt til link - directive?		
 		angular.element('ul.tabs').tabs();
 				
 		// Fetching base url + organisation units on document ready
@@ -14,11 +18,11 @@ angular.module('orgunitmanager')
 		function getBaseUrl() {
 			orgfactory.getBaseUrl().success(function (result) {
 				urlBase = result.activities.dhis.href + "/api";
-				getOrgunits();
+				populateSite();
 			});
 		}
 
-		function getOrgunits() {
+		function populateSite() {
 			orgfactory.getOrgUnits()
 				.success(function (result) {
 					console.log('Orgunits Loaded');
@@ -31,6 +35,22 @@ angular.module('orgunitmanager')
 				.error(function (error) {
 					console.log('Unable to fetch organization units: ' + error);
 				});
+				
+			orgfactory.getLevels().success(function (result) {
+				$scope.orgLevels = result.organisationUnitLevels;
+				$scope.$broadcast('orgLevelsAndGroupsLoaded');
+			})
+			.error (function (error) {
+				console.log(error);
+			});
+			
+			orgfactory.getGroups().success(function (result) {
+				$scope.orgGroups = result.organisationUnitGroups;
+				$scope.$broadcast('orgLevelsAndGroupsLoaded');
+			})
+			.error (function (error) {
+				console.log(error);
+			});
 		}
 
 		$scope.setInitState = function() {

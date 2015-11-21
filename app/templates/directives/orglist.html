@@ -1,17 +1,20 @@
 <div>
 	<div class="row">
 		<form>
-			<input type="text" placeholder="Search" class="col s12 m4">
-			<div class="input-field col s12 m4 offset-m4 right">
+			<input type="text" placeholder="Search" class="col s12">
+			<div class="input-field col s12 m6">
 				<select>
-					<!--  get list from db? laaso border options? -->
 					<option value="" selected>Choose level</option>
-					<option value="1">Chiefdom</option>
-					<option value="2">District</option>
-					<option value="3">Facility</option>
-					<option value="4">National</option>
+					<option ng-repeat="level in orgLevels"value="{{level.id}}">{{level.name}}</option>
 				</select>
 				<label>Level</label>
+			</div>
+			<div class="input-field col s12 m6">
+				<select>
+					<option value="" selected>Choose group</option>
+					<option ng-repeat="group in orgGroups"value="{{group.id}}">{{group.name}}</option>
+				</select>
+				<label>Group</label>
 			</div>
 		</form>
 	</div>
