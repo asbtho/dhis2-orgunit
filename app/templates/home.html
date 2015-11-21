@@ -9,6 +9,7 @@
 		<ui-gmap-google-map center="map.center" zoom="map.zoom" options="options">
 			<ui-gmap-map-control template="addNew.tpl.html" position="top-right" controller="googleMapsCtrl" index="-1"></ui-gmap-map-control>
 			<ui-gmap-map-control template="findMe.tpl.html" position="top-left" controller="googleMapsCtrl" index="-1"></ui-gmap-map-control>
+			<ui-gmap-markers models="markerArray" coords="'self'" icon="'icon'" ></ui-gmap-markers>
 		</ui-gmap-google-map>
 	</div>
 	<div id="fill-content" class="col s12 m8">
