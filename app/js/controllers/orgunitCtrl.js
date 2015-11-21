@@ -13,7 +13,6 @@ angular.module('orgunitmanager')
 		var currentDetails;
 
 		function getBaseUrl() {
-			
 			orgfactory.getBaseUrl().success(function (result) {
 				urlBase = result.activities.dhis.href + "/api";
 				getOrgunits();
@@ -42,7 +41,6 @@ angular.module('orgunitmanager')
 		//save details on click? probably not necessary		
 		$scope.getOrgDetails = function getOrgDetails(id) {
 			if (currentDetails != id) {
-				console.log(id);
 				currentDetails = id;
 				orgfactory.getOrgDetails(id)
 					.success(function (result) {
@@ -52,12 +50,10 @@ angular.module('orgunitmanager')
 					.error(function (error) {
 						console.log('Unable to get organization unit details: ' + error);
 					});
-			} else {
-				console.log('Closing details');
 			}
 		};
 		
-		// Simjes pagenation - Merging, needs fixing for saved data ???
+		// Simjes pagenation - Merging, needs fixing for saved data ??? also choose # of items on each page, dynamic paging
         $scope.goToPage = function (page) {
             $scope.activePage = page;
             if (pageData.hasOwnProperty('page' + page)) {
