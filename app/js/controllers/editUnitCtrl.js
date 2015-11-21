@@ -12,9 +12,9 @@ angular.module('orgunitmanager')
 
 		$scope.initEdit = function () {
 			$scope.unitToEdit = $stateParams.unitCurrentDetails;
+			//temp fix? ng-model errors på date
 			angular.element('#org_opening_date').val($scope.unitToEdit.openingDate);
 			angular.element('#org_closed_date').val($scope.unitToEdit.closedDate);
-			console.log($stateParams.unitCurrentDetails);
 		}
 
 		$scope.editUnit = function () {
