@@ -25,6 +25,10 @@ angular.module('orgunitmanager')
 		orgfactory.addOrgUnit = function(newOrgUnit) {
 			return $http.post(urlBase + '/organisationUnits', newOrgUnit);
 		}
+		
+		orgfactory.editOrgUnit = function (id, editOrgUnit) {
+			return $http.patch(urlBase + '/organisationUnits/' + id , editOrgUnit);
+		}
 
 		return orgfactory;
 	}]);
