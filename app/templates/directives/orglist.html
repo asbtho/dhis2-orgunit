@@ -44,8 +44,15 @@
 							<b>Closed date:</b> {{orgdetails.closedDate}}
 						</div>
 						<div class="col s12 m4">
-							<b>Registers date:</b> {{orgdetails.registersDate}}
-							<!-- korrekt? -->
+							<b>Registers date:</b>
+							<div ng-switch on="orgdetails.active">
+								<div ng-switch-when="true">
+									Yes
+								</div>
+								<div ng-switch-default>
+									No
+								</div>
+							</div>
 						</div>
 						<div class="col s12">
 							<b>Comment:</b> {{orgdetails.comment}}
