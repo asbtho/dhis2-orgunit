@@ -1,7 +1,7 @@
 <div ng-init="initEdit()">
 	<h5 class="center">Edit unit</h5>
 	<div class="row">
-		<form class="col s12">
+		<form name="editForm" class="col s12">
 			<div class="row">
 				<h6>Details</h6>
 				<div class="input-field col s12 m6">
@@ -56,7 +56,7 @@
 					<label for="contact_phone" class="active">Phone number</label>
 				</div>
 			</div>
-			<button class="btn waves-effect waves-light" type="submit" name="edit_org_unit" ng-click="editUnit()">Confirm</button>
+			<button class="btn waves-effect waves-light" type="submit" name="edit_org_unit" ng-click="editUnit()" ng-disabled="editForm.$invalid">Confirm</button>
 		</form>
 	</div>
 </div>
