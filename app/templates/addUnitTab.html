@@ -1,15 +1,14 @@
 <h5 class="center">Add unit</h5>
 <div class="row">
-	<!-- directive! ADD/EDIT better routing?? -->
 	<form class="col s12">
 		<div class="row">
 			<h6>Details</h6>
 			<div class="input-field col s12 m6">
-				<input id="org_name" type="text" ng-model="newOrg.name">
+				<input id="org_name" type="text" ng-model="newOrg.name" required>
 				<label for="org_name">Name</label>
 			</div>
 			<div class="input-field col s12 m6">
-				<input id="short_name" type="text" ng-model="newOrg.shortName">
+				<input id="short_name" type="text" ng-model="newOrg.shortName" required>
 				<label for="short_name">Short Name</label>
 			</div>
 			<div class="input-field col s12">
@@ -21,8 +20,7 @@
 				<label for="org_code">Code</label>
 			</div>
 			<div class="input-field col s12 m6">
-				<!-- validateion -->
-				<input id="org_url" type="text" ng-model="newOrg.url">
+				<input id="org_url" type="url" ng-model="newOrg.url" class="validate">
 				<label for="org_url">URL</label>
 			</div>
 
@@ -40,7 +38,7 @@
 			</div>
 			<div class="col s12">
 				<label for="org_opening_date">Opening Date</label>
-				<input id="org_opening_date" type="date" class="datepicker" ng-model="newOrg.openingDate">
+				<input id="org_opening_date" type="date" class="datepicker" ng-model="newOrg.openingDate" required>
 			</div>
 		</div>
 		<div class="row">
@@ -54,8 +52,7 @@
 				<label for="contact_address">Address</label>
 			</div>
 			<div class="input-field col s12 m6">
-				<!-- validate email? -->
-				<input id="contact_email" type="email" ng-model="newOrg.contactEmail">
+				<input id="contact_email" type="email" ng-model="newOrg.contactEmail" class="validate">
 				<label for="contact_email">Email</label>
 			</div>
 			<div class="input-field col s12 m6">

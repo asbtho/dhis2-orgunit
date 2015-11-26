@@ -32,8 +32,6 @@ angular.module('orgunitmanager')
 			});
 
 			orgfactory.getLevels().success(function (result) {
-				console.log('leeeeeeeeevels test:');
-				console.log(result);
 				$scope.orgLevels = result.organisationUnitLevels;
 				$scope.$broadcast('orgLevelsAndGroupsLoaded');
 			})
@@ -54,7 +52,6 @@ angular.module('orgunitmanager')
 			$state.go('home.search');
 		}
 
-		//save details on click? probably not necessary		
 		$scope.getOrgDetails = function getOrgDetails(id) {
 			if (currentDetails != id) {
 				currentDetails = id;
