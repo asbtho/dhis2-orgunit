@@ -109,31 +109,25 @@ angular.module('orgunitmanager')
 
 		$scope.getSearchResult = function () {
 			//paging?--------------------------- og evt kun filtre uten searchstring?
-			var parameters = "";
-			if ($scope.searchPhrase === "") {
-				orgfactory.getOrgUnits().success(function (result) {
-					$scope.orgunits = result.organisationUnits;
-					pageData.page1 = result.organisationUnits;
-					$scope.numberOfPages = new Array(result.pager.pageCount);
-					$scope.activePage = 1;
-					$scope.$broadcast('orgunitsloaded');
-				}).error(function (error) {
-					console.log('Unable to fetch organization units: ' + error);
-				});
-			} else {
-				parameters += "filter=name:like:" + $scope.searchPhrase;
-				if ($scope.selectedLevel) {
-					parameters += "&filter=level:eq:" + $scope.selectedLevel;
-				}
-				if ($scope.selectedGroup) {
-					parameters += "&filter=organisationUnitGroups.id:eq:" + $scope.selectedGroup;
-				}
-				orgfactory.getSearchResults(parameters).success(function (result) {
-					$scope.orgunits = result.organisationUnits;
-					$scope.$broadcast('orgunitsloaded');
-				}).error(function (error) {
-					console.log(error);
-				});
+			var params = [];
+
+			if ($scope.searchPhrase !== "") {
+				params.push ('filter=name:like:' + $scope.searchPhrase);
 			}
+
+			if ($scope.selectedLevel) {
+				params.push('filter=level:eq:' +  $scope.selectedLevel);
+			}
+
+			if ($scope.selectedGroup) {
+				params.push('filter=organisationUnitGroups.id:eq:' + $scope.selectedGroup);
+			}
+
+			orgfactory.getSearchResults(params).success(function (result) {
+				$scope.orgunits = result.organisationUnits;
+				$scope.$broadcast('orgunitsloaded');
+			}).error(function (error) {
+				console.log(error);
+			});
 		}
 	}]);
