@@ -103,6 +103,14 @@ angular.module('orgunitmanager')
 			});
 		}
 
+		$scope.clearSearch = function () {
+			console.log("clear search");
+			$scope.searchPhrase = "";
+			//$scope.selectedLevel = "";
+			//$scope.selectedGroup = "";
+			$scope.getSearchResult();
+		}
+
 		function getParams() {
 			var params = [];
 
