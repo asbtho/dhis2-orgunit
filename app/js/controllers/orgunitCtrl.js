@@ -12,7 +12,6 @@ angular.module('orgunitmanager')
 		// Fetching base url + organisation units on document ready
 		getBaseUrl();
 
-		var pageData = {};
 		var currentDetails;
 
 		function getBaseUrl() {
@@ -24,9 +23,7 @@ angular.module('orgunitmanager')
 
 		function populateSite() {
 			orgfactory.getOrgUnits().success(function (result) {
-				console.log('Orgunits Loaded');
 				$scope.orgunits = result.organisationUnits;
-				pageData.page1 = result.organisationUnits;
 				$scope.numberOfPages = new Array(result.pager.pageCount);
 				$scope.activePage = 1;
 				$scope.$broadcast('orgunitsloaded');
@@ -63,7 +60,6 @@ angular.module('orgunitmanager')
 				currentDetails = id;
 				orgfactory.getOrgDetails(id)
 					.success(function (result) {
-						//Depending how the result works and which details we want.
 						$scope.orgdetails = result;
 					})
 					.error(function (error) {
@@ -71,25 +67,18 @@ angular.module('orgunitmanager')
 					});
 			}
 		};
-		
-		// Simjes pagenation - Merging, needs fixing for saved data ??? also choose # of items on each page, dynamic paging
-		// not save pages?
+
         $scope.goToPage = function (page) {
             $scope.activePage = page;
-            if (pageData.hasOwnProperty('page' + page)) {
-                $scope.orgunits = pageData['page' + page];
-                $scope.$broadcast('orgunitsloaded');
-            } else {
-                orgfactory.getPageUnits(page)
-					.success(function (result) {
-						$scope.orgunits = result.organisationUnits;
-						pageData['page' + page] = result.organisationUnits;
-						$scope.$broadcast('orgunitsloaded');
-					})
-					.error(function (error) {
-						console.log(error);
-					});
-            }
+			orgfactory.getPageUnits(page)
+				.success(function (result) {
+					$scope.orgunits = result.organisationUnits;
+					$scope.$broadcast('orgunitsloaded');
+				})
+				.error(function (error) {
+					console.log(error);
+				});
+
         }
 
 		$scope.editOrgDetails = function (currentDetails) {
@@ -108,16 +97,15 @@ angular.module('orgunitmanager')
 		}
 
 		$scope.getSearchResult = function () {
-			//paging?--------------------------- og evt kun filtre uten searchstring?
 			var params = [];
 
 			if ($scope.searchPhrase) {
-				console.log("such search: " +$scope.searchPhrase);
-				params.push ('filter=name:like:' + $scope.searchPhrase);
+				console.log("such search: " + $scope.searchPhrase);
+				params.push('filter=name:like:' + $scope.searchPhrase);
 			}
 
 			if ($scope.selectedLevel) {
-				params.push('filter=level:eq:' +  $scope.selectedLevel);
+				params.push('filter=level:eq:' + $scope.selectedLevel);
 			}
 
 			if ($scope.selectedGroup) {
@@ -126,6 +114,8 @@ angular.module('orgunitmanager')
 
 			orgfactory.getSearchResults(params).success(function (result) {
 				$scope.orgunits = result.organisationUnits;
+				$scope.numberOfPages = new Array(result.pager.pageCount);
+				$scope.activePage = 1;
 				$scope.$broadcast('orgunitsloaded');
 			}).error(function (error) {
 				console.log(error);
