@@ -6,21 +6,17 @@ angular.module('orgunitmanager')
 		orgfactory.getBaseUrl = function () {
 			return $http.get('manifest.webapp');
 		}
-		
-		// This should return .json file of organisationUnits
+
 		orgfactory.getOrgUnits = function () {
-			//include long og lati for insta markers på map?
 			return $http.get(urlBase + "/organisationUnits.json");
 		}
-		
-		// Should return details about the organisation unit
-		// via the id referenced in the .json file from above function
+
 		orgfactory.getOrgDetails = function (id) {
 			return $http.get(urlBase + '/organisationUnits/' + id + '.json');
 		}
 
-		orgfactory.getPageUnits = function (page) {
-			return $http.get(urlBase + '/organisationUnits.json?page=' + page);
+		orgfactory.getPageUnits = function (page, parameters) {
+			return $http.get(urlBase + '/organisationUnits.json?page=' + page + "&" + createFilter(parameters));
 		}
 
 		orgfactory.addOrgUnit = function (newOrgUnit) {
@@ -40,15 +36,18 @@ angular.module('orgunitmanager')
 		}
 
 		orgfactory.getSearchResults = function (parameters) {
+			return $http.get(urlBase + '/organisationUnits.json?' + createFilter(parameters));
+		}
+		
+		function createFilter(parameters) {
 			var filter = "";
 			for (var i = 0; i < parameters.length; i++) {
 				filter += parameters[i];
-				if (i !== (parameters.length -1)) {
+				if (i !== (parameters.length - 1)) {
 					filter += "&";
 				}
 			}
-			console.log(filter);
-			return $http.get(urlBase + '/organisationUnits.json?' + filter);
+			return filter;
 		}
 
 		return orgfactory;

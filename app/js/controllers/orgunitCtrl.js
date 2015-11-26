@@ -66,8 +66,8 @@ angular.module('orgunitmanager')
 		};
 
         $scope.goToPage = function (page) {
-            $scope.activePage = page;
-			orgfactory.getPageUnits(page)
+			$scope.activePage = page;
+			orgfactory.getPageUnits(page, getParams())
 				.success(function (result) {
 					$scope.orgunits = result.organisationUnits;
 					$scope.$broadcast('orgunitsloaded');
@@ -75,7 +75,6 @@ angular.module('orgunitmanager')
 				.error(function (error) {
 					console.log(error);
 				});
-
         }
 
 		$scope.editOrgDetails = function (currentDetails) {
@@ -94,10 +93,20 @@ angular.module('orgunitmanager')
 		}
 
 		$scope.getSearchResult = function () {
+			orgfactory.getSearchResults(getParams()).success(function (result) {
+				$scope.orgunits = result.organisationUnits;
+				$scope.numberOfPages = new Array(result.pager.pageCount);
+				$scope.activePage = 1;
+				$scope.$broadcast('orgunitsloaded');
+			}).error(function (error) {
+				console.log(error);
+			});
+		}
+
+		function getParams() {
 			var params = [];
 
 			if ($scope.searchPhrase) {
-				console.log("such search: " + $scope.searchPhrase);
 				params.push('filter=name:like:' + $scope.searchPhrase);
 			}
 
@@ -108,14 +117,6 @@ angular.module('orgunitmanager')
 			if ($scope.selectedGroup) {
 				params.push('filter=organisationUnitGroups.id:eq:' + $scope.selectedGroup);
 			}
-
-			orgfactory.getSearchResults(params).success(function (result) {
-				$scope.orgunits = result.organisationUnits;
-				$scope.numberOfPages = new Array(result.pager.pageCount);
-				$scope.activePage = 1;
-				$scope.$broadcast('orgunitsloaded');
-			}).error(function (error) {
-				console.log(error);
-			});
+			return params;
 		}
 	}]);
