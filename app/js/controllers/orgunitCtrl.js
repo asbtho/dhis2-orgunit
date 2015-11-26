@@ -111,7 +111,8 @@ angular.module('orgunitmanager')
 			//paging?--------------------------- og evt kun filtre uten searchstring?
 			var params = [];
 
-			if ($scope.searchPhrase !== "") {
+			if ($scope.searchPhrase) {
+				console.log("such search: " +$scope.searchPhrase);
 				params.push ('filter=name:like:' + $scope.searchPhrase);
 			}
 
