@@ -1,6 +1,12 @@
+<<<<<<< HEAD
 angular.module('orgunitmanager', ['ui.router'])
     .config(function ($stateProvider, $urlRouterProvider) {
         $urlRouterProvider.otherwise("search");
+=======
+angular.module('orgunitmanager', ['ui.router', 'uiGmapgoogle-maps'])
+    .config(function ($stateProvider, $urlRouterProvider, uiGmapGoogleMapApiProvider) {
+        $urlRouterProvider.otherwise("/");
+>>>>>>> origin/Asbjorn-branch
         $stateProvider
             .state('home', {
                 url: '/',
@@ -38,4 +44,10 @@ angular.module('orgunitmanager', ['ui.router'])
                     }
                 }
             });
+            
+        uiGmapGoogleMapApiProvider.configure({
+            key: 'AIzaSyBXLIUnaJ1mkQ_-MwUhyQTHbusQdSm7lCw',
+            v: '3.20', //defaults to latest 3.X anyhow
+            libraries: 'weather,geometry,visualization'
+        });
     });

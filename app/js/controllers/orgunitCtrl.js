@@ -127,4 +127,9 @@ angular.module('orgunitmanager')
 			}
 			return params;
 		}
+			
+		// uiGmapGoogleMapApi is a promise.
+		// The "then" callback function provides the google.maps object.
+			
+			
 	}]);

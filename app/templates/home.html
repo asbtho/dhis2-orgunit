@@ -1,6 +1,18 @@
 <div class="row" ng-init="setInitState()">
 	<div id="map-holder" class="col s12 m8">
-		map window
+		<div id="map-holder" ng-controller="googleMapsCtrl">
+			<script type="text/ng-template" id="addNew.tpl.html">
+				<button class="btn btn-sm btn-primary" ng-click="addNewClick()">{{addNewText}}</button>
+			</script>
+			<script type="text/ng-template" id="findMe.tpl.html">
+				<button class="btn btn-sm btn-primary" ng-click="findMeClick()">{{findMeText}}</button>
+			</script>
+			<ui-gmap-google-map center="map.center" zoom="map.zoom" options="options">
+				<ui-gmap-map-control template="addNew.tpl.html" position="top-right" controller="googleMapsCtrl" index="-1"></ui-gmap-map-control>
+				<ui-gmap-map-control template="findMe.tpl.html" position="top-left" controller="googleMapsCtrl" index="-1"></ui-gmap-map-control>
+				<ui-gmap-markers models="markerArray" coords="'self'" icon="'icon'"></ui-gmap-markers>
+			</ui-gmap-google-map>
+		</div>
 	</div>
 	<div id="fill-content" class="col s12 m4">
 		<div class="row">
