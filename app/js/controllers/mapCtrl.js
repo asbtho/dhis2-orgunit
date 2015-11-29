@@ -15,7 +15,8 @@ angular.module('orgunitmanager')
 					enable: ['zoomstart', 'drag', 'click'],
 					logic: 'emit'
 				}
-			}
+			},
+			paths: {}
 		});
 		$scope.$on('leafletDirectiveMap.click', function (event, args) {
 			var clickEvent = args.leafletEvent;
@@ -53,6 +54,13 @@ angular.module('orgunitmanager')
 					$scope.markers.currentMark = markerForOrgUnit.markerDetails;
 				} else {
 					var currentMark = {};
+					var path = {
+						p1: {
+							color: '#008000',
+							weight: 8,
+							latlngs: []
+						}
+					};
 					for (var i = 0; i < coordsArray[0][0].length; i++) {
 						var marker = {
 							lat: coordsArray[0][0][i][0],
@@ -62,8 +70,10 @@ angular.module('orgunitmanager')
 							draggable: false
 						}
 						currentMark["m" + i] = marker;
+						path.p1.latlngs.push({lat: coordsArray[0][0][i][0], lng: coordsArray[0][0][i][1]});
 					}
 					$scope.markers = currentMark;
+					$scope.paths = path;
 				}
 			}
 		});
