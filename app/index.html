@@ -2,10 +2,12 @@
 <html ng-app="orgunitmanager">
 
 <head>
+	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.1/leaflet.css">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link href="style/materialize.min.css" rel="stylesheet">
 	<link href="style/style.css" rel="stylesheet">
 </head>
+
 <body>
 	<nav>
 		<div class="nav-wrapper blue">
@@ -14,26 +16,21 @@
 	</nav>
 
 	<div ui-view></div>
-	
+
 	<script src="js/jquery.min.js"></script>
-	<script src="js/lodash.js"></script>
+	<script src="http://cdn.leafletjs.com/leaflet-0.7.1/leaflet.js"></script>
 	<script src="js/angular.min.js"></script>
+	<script src="js/angular-leaflet-directive.min.js"></script>
 	<script src="js/angular-ui-router.min.js"></script>
 	<script src="js/materialize.min.js"></script>
 	<script src="js/angular-simple-logger.js"></script>
-	<script src="js/angular-google-maps.min.js"></script>
 	<script src="js/app.js"></script>
 	<script src="js/controllers/orgunitCtrl.js"></script>
-<<<<<<< HEAD
 	<script src="js/controllers/addUnitCtrl.js"></script>
 	<script src="js/controllers/editUnitCtrl.js"></script>
-=======
-	<script src="js/controllers/googleMapsCtrl.js"></script>
->>>>>>> origin/Asbjorn-branch
+	<script src="js/controllers/mapCtrl.js"></script>
 	<script src="js/directives/orglist.js"></script>
 	<script src="js/factories/orgfactory.js"></script>
-	
-	
 </body>
 
 </html>
