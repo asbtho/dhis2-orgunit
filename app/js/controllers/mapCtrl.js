@@ -9,15 +9,7 @@ angular.module('orgunitmanager')
 			defaults: {
 				scrollWheelZoom: true
 			},
-			markers: {
-				osloMarker: {
-					lat: 59.91,
-					lng: 10.75,
-					message: "I want to travel here!",
-					focus: true,
-					draggable: false
-				}
-			},
+			markers: {},
 			events: {
 				map: {
 					enable: ['zoomstart', 'drag', 'click'],
@@ -25,17 +17,33 @@ angular.module('orgunitmanager')
 				}
 			}
 		});
-		$scope.$on('leafletDirectiveMap.click', function (event) {
+		$scope.$on('leafletDirectiveMap.click', function (event, args) {
+			var clickEvent = args.leafletEvent;
 			var newMarker = {
-				nmark: {
-					lat: 2,
-					lng: 10,
-					message: "new marker",
+				markerDetails: {
+					lat: clickEvent.latlng.lat,
+					lng: clickEvent.latlng.lng,
+					message: 'Do you want to add a new unit here?',
 					focus: true,
 					draggable: false
 				}
 			}
-			$scope.markers[newMarker["nmark"]] = newMarker.nmark;
+			$scope.markers.currentMark = newMarker.markerDetails;
 			console.log($scope.markers);
+		});
+
+		$scope.$watch(function () {
+			return orgDetails;
+		}, function (oldValue, newValue) {
+			var markerForOrgUnit = {
+				markerDetails: {
+					lat: 3,
+					lng: 2,
+					message: 'details',
+					focus: true,
+					draggable: false
+				}
+			}
+			$scope.markers.currentMark = markerForOrgUnit.markerDetails;
 		});
 	}]);

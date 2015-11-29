@@ -1,4 +1,5 @@
 var urlBase = "";
+var orgDetails = {};
 
 angular.module('orgunitmanager')
 	.controller('orgunitCtrl', ['$scope', 'orgfactory', '$state', function ($scope, orgfactory, $state) {
@@ -34,18 +35,16 @@ angular.module('orgunitmanager')
 			orgfactory.getLevels().success(function (result) {
 				$scope.orgLevels = result.organisationUnitLevels;
 				$scope.$broadcast('orgLevelsAndGroupsLoaded');
-			})
-				.error(function (error) {
-					console.log(error);
-				});
+			}).error(function (error) {
+				console.log(error);
+			});
 
 			orgfactory.getGroups().success(function (result) {
 				$scope.orgGroups = result.organisationUnitGroups;
 				$scope.$broadcast('orgLevelsAndGroupsLoaded');
-			})
-				.error(function (error) {
-					console.log(error);
-				});
+			}).error(function (error) {
+				console.log(error);
+			});
 		}
 
 		$scope.setInitState = function () {
@@ -58,12 +57,14 @@ angular.module('orgunitmanager')
 				orgfactory.getOrgDetails(id)
 					.success(function (result) {
 						$scope.orgdetails = result;
+						orgDetails = result;
 					})
 					.error(function (error) {
 						console.log('Unable to get organization unit details: ' + error);
 					});
 			}
 		};
+
 
         $scope.goToPage = function (page) {
 			$scope.activePage = page;
@@ -127,5 +128,5 @@ angular.module('orgunitmanager')
 			}
 			return params;
 		}
-		
+
 	}]);
