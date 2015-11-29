@@ -56,8 +56,9 @@ angular.module('orgunitmanager')
 					var currentMark = {};
 					var path = {
 						p1: {
-							color: '#008000',
-							weight: 8,
+							stroke: false,
+		                    fillColor: '#2196F3',
+		                    type: 'polygon',
 							latlngs: []
 						}
 					};
