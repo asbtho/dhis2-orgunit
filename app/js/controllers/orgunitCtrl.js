@@ -57,6 +57,7 @@ angular.module('orgunitmanager')
 				orgfactory.getOrgDetails(id)
 					.success(function (result) {
 						$scope.orgdetails = result;
+						//get lat and long
 						orgDetails = result;
 					})
 					.error(function (error) {
