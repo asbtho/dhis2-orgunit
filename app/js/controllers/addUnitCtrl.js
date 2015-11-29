@@ -17,7 +17,7 @@ angular.module('orgunitmanager')
 				openingDate: $scope.newOrg.openingDate,
 				description: $scope.newOrg.description,
 				comment: $scope.newOrg.comment,
-				//save lat and long??
+				//really the way so save lat and long?
 				coordinates: "[" + $scope.newOrg.latitude + "," + $scope.newOrg.longitude + "]",
 				url: $scope.newOrg.url,
 				contactPerson: $scope.newOrg.contactPerson,

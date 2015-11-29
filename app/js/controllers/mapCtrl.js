@@ -4,7 +4,7 @@ angular.module('orgunitmanager')
 			center: {
 				lat: 40.095,
 				lng: -3.823,
-				zoom: 4
+				zoom: 5
 			},
 			defaults: {
 				scrollWheelZoom: true
@@ -34,21 +34,42 @@ angular.module('orgunitmanager')
 
 		$scope.$watch(function () {
 			return orgDetails;
-		}, function (oldValue, newValue) {
-			console.log(newValue);
-			var coordsString = newValue.coordinates.slice(1, newValue.coordinates.length - 1);
-			console.log(coordsString);
-			var coords = coordsString.split(",");
-			console.log(coords);
-			var markerForOrgUnit = {
-				markerDetails: {
-					lat: parseInt(coords[0]),
-					lng: parseInt(coords[1]),
-					message: 'details',
-					focus: true,
-					draggable: false
+		}, function (newValue, oldValue) {
+			if (newValue.coordinates) {
+				var coordsArray = JSON.parse(newValue.coordinates);
+				console.log("coordsarray:");
+				console.log(coordsArray);
+				if (coordsArray.length == 2) {
+					var markerForOrgUnit = {
+						markerDetails: {
+							lat: coordsArray[0],
+							lng: coordsArray[1],
+							message: 'details',
+							focus: true,
+							draggable: false
+						}
+					}
+					$scope.markers.currentMark = markerForOrgUnit.markerDetails;
+				} else {
+					//else if?
+					var currentMark = {};
+					for (var i = 0; i < coordsArray[0][0].length; i++) {
+						var marker = {
+							lat: coordsArray[0][0][i][0],
+							lng: coordsArray[0][0][i][1],
+							message: 'details',
+							focus: true,
+							draggable: false
+						}
+						currentMark["m" + i] = marker;
+					}
+					console.log("currentmark: ");
+					console.log(currentMark);
+					$scope.markers.currentMark = currentMark;
+					console.log($scope.markers.currentMark);
 				}
+			} else {
+				$scope.markers.currentMark = {};
 			}
-			$scope.markers.currentMark = markerForOrgUnit.markerDetails;
 		});
 	}]);
