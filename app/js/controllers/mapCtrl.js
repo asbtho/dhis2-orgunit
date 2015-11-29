@@ -35,10 +35,11 @@ angular.module('orgunitmanager')
 		$scope.$watch(function () {
 			return orgDetails;
 		}, function (newValue, oldValue) {
+			$scope.markers = {};
+			
 			if (newValue.coordinates) {
 				var coordsArray = JSON.parse(newValue.coordinates);
-				console.log("coordsarray:");
-				console.log(coordsArray);
+				//arrays med andre lengder?
 				if (coordsArray.length == 2) {
 					var markerForOrgUnit = {
 						markerDetails: {
@@ -51,7 +52,6 @@ angular.module('orgunitmanager')
 					}
 					$scope.markers.currentMark = markerForOrgUnit.markerDetails;
 				} else {
-					//else if?
 					var currentMark = {};
 					for (var i = 0; i < coordsArray[0][0].length; i++) {
 						var marker = {
@@ -63,13 +63,8 @@ angular.module('orgunitmanager')
 						}
 						currentMark["m" + i] = marker;
 					}
-					console.log("currentmark: ");
-					console.log(currentMark);
-					$scope.markers.currentMark = currentMark;
-					console.log($scope.markers.currentMark);
+					$scope.markers = currentMark;
 				}
-			} else {
-				$scope.markers.currentMark = {};
 			}
 		});
 	}]);
