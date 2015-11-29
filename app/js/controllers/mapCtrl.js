@@ -19,6 +19,7 @@ angular.module('orgunitmanager')
 			paths: {}
 		});
 		$scope.$on('leafletDirectiveMap.click', function (event, args) {
+			clearMap();
 			var clickEvent = args.leafletEvent;
 			var newMarker = {
 				markerDetails: {
@@ -36,8 +37,7 @@ angular.module('orgunitmanager')
 		$scope.$watch(function () {
 			return orgDetails;
 		}, function (newValue, oldValue) {
-			$scope.markers = {};
-			
+			clearMap();
 			if (newValue.coordinates) {
 				var coordsArray = JSON.parse(newValue.coordinates);
 				//arrays med andre lengder?
@@ -77,4 +77,8 @@ angular.module('orgunitmanager')
 				}
 			}
 		});
+		function clearMap() {
+			$scope.markers = {};
+			$scope.paths = {};
+		}
 	}]);
