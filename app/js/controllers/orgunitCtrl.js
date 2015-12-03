@@ -1,113 +1,133 @@
 var urlBase = "";
+var orgDetails = {};
 
 angular.module('orgunitmanager')
-	.controller('orgunitCtrl', ['$scope', 'orgfactory', '$http', function ($scope, orgfactory, $http) {
+	.controller('orgunitCtrl', ['$scope', 'orgfactory', '$state', function ($scope, orgfactory, $state) {
 
-		$scope.newOrg = {};
+		$scope.orgLevels = {};
+		$scope.orgGroups = {};
 		
-		//Enabling tabs in home
+		//flytt til link - directive?		
 		angular.element('ul.tabs').tabs();
-		angular.element('.datepicker').pickadate({
-			selectMonths: true, // Creates a dropdown to control month
-			selectYears: 15, // Creates a dropdown of 15 years to control year
-			format: 'yyyy-mm-dd'
-		});
-		
+				
 		// Fetching base url + organisation units on document ready
 		getBaseUrl();
 
-		var pageData = {};
 		var currentDetails;
 
 		function getBaseUrl() {
 			orgfactory.getBaseUrl().success(function (result) {
 				urlBase = result.activities.dhis.href + "/api";
-				getOrgunits();
+				populateSite();
 			});
 		}
 
-		function getOrgunits() {
-			orgfactory.getOrgUnits()
-				.success(function (result) {
-					console.log('Orgunits Loaded');
-					$scope.orgunits = result.organisationUnits;
-					pageData.page1 = result.organisationUnits;
-                    $scope.numberOfPages = new Array(result.pager.pageCount);
-                    $scope.activePage = 1;
-					$scope.$broadcast('orgunitsloaded');
-				})
-				.error(function (error) {
-					console.log('Unable to fetch organization units: ' + error);
-				});
+		function populateSite() {
+			orgfactory.getOrgUnits().success(function (result) {
+				$scope.orgunits = result.organisationUnits;
+				$scope.numberOfPages = new Array(result.pager.pageCount);
+				$scope.activePage = 1;
+				$scope.$broadcast('orgunitsloaded');
+			}).error(function (error) {
+				console.log('Unable to fetch organization units: ' + error);
+			});
+
+			orgfactory.getLevels().success(function (result) {
+				$scope.orgLevels = result.organisationUnitLevels;
+				$scope.$broadcast('orgLevelsAndGroupsLoaded');
+			}).error(function (error) {
+				console.log(error);
+			});
+
+			orgfactory.getGroups().success(function (result) {
+				$scope.orgGroups = result.organisationUnitGroups;
+				$scope.$broadcast('orgLevelsAndGroupsLoaded');
+			}).error(function (error) {
+				console.log(error);
+			});
 		}
 
-		//save details on click? probably not necessary		
+		$scope.setInitState = function () {
+			$state.go('home.search');
+		}
+
 		$scope.getOrgDetails = function getOrgDetails(id) {
 			if (currentDetails != id) {
-				console.log(id);
 				currentDetails = id;
 				orgfactory.getOrgDetails(id)
 					.success(function (result) {
-						//Depending how the result works and which details we want.
 						$scope.orgdetails = result;
+						//get lat and long
+						orgDetails = result;
 					})
 					.error(function (error) {
 						console.log('Unable to get organization unit details: ' + error);
 					});
-			} else {
-				console.log('Closing details');
 			}
 		};
-		
-		// Simjes pagenation - Merging
+
+
         $scope.goToPage = function (page) {
-            $scope.activePage = page;
-            if (pageData.hasOwnProperty('page' + page)) {
-                $scope.orgunits = pageData['page' + page];
-                $scope.$broadcast('orgunitsloaded');
-            } else {
-                orgfactory.getPageUnits(page)
-					.success(function (result) {
-						$scope.orgunits = result.organisationUnits;
-						pageData['page' + page] = result.organisationUnits;
-						$scope.$broadcast('orgunitsloaded');
-					})
-					.error(function (error) {
-						console.log('Pagination fucked up: ' + error);
-					});
-            }
+			$scope.activePage = page;
+			orgfactory.getPageUnits(page, getParams())
+				.success(function (result) {
+					$scope.orgunits = result.organisationUnits;
+					$scope.$broadcast('orgunitsloaded');
+				})
+				.error(function (error) {
+					console.log(error);
+				});
         }
 
-		$scope.addNewUnit = function () {
-			var newUnitAsJSON = {
-				code: $scope.newOrg.code,
-				name: $scope.newOrg.name,
-				shortName: $scope.newOrg.shortName,
-				openingDate: $scope.newOrg.openingDate,
-				description: $scope.newOrg.description,
-				comment: $scope.newOrg.comment,
-				longitude: $scope.newOrg.longitude,
-				latitude: $scope.newOrg.latitude,
-				url: "" //$scope.newOrg.url
-				/*
-				contactPerson: $scope.newOrg.contactPerson,
-				contactAddress: $scope.newOrg.contactAddress,
-				contactEmail: $scope.newOrg.contactEmail,
-				contactPhone: $scope.newOrg.contactPhone*/
-			};
-			console.log($scope.newOrg.openingDate);
-
-			orgfactory.addOrgUnit(newUnitAsJSON)
-				.success(function (result) {
-					getOrgunits();
-					$scope.newOrg = {};
-					angular.element('ul.tabs').tabs('select_tab', 'search-window');
-					Materialize.toast('Success', 4000);
-				});
+		$scope.editOrgDetails = function (currentDetails) {
+			$state.go('home.edit', { unitCurrentDetails: currentDetails });
 		}
-			
-		// uiGmapGoogleMapApi is a promise.
-		// The "then" callback function provides the google.maps object.
-			
-			
+
+		$scope.goToState = function (stateName) {
+			switch (stateName) {
+				case 'search':
+					$state.go('home.search');
+					break;
+				case 'add':
+					$state.go('home.add');
+					break;
+			}
+		}
+
+		$scope.getSearchResult = function () {
+			orgfactory.getSearchResults(getParams()).success(function (result) {
+				$scope.orgunits = result.organisationUnits;
+				$scope.numberOfPages = new Array(result.pager.pageCount);
+				$scope.activePage = 1;
+				$scope.$broadcast('orgunitsloaded');
+			}).error(function (error) {
+				console.log(error);
+			});
+		}
+
+		/*$scope.clearSearch = function () {
+			console.log("clear search");
+			$scope.searchPhrase = "";
+			//$scope.selectedLevel = "";
+			//$scope.selectedGroup = "";
+			$scope.getSearchResult();
+		}*/
+
+		function getParams() {
+			var params = [];
+
+			if ($scope.searchPhrase) {
+				params.push('filter=name:like:' + $scope.searchPhrase);
+			}
+
+			if ($scope.selectedLevel) {
+				params.push('filter=level:eq:' + $scope.selectedLevel);
+			}
+
+			if ($scope.selectedGroup) {
+				params.push('filter=organisationUnitGroups.id:eq:' + $scope.selectedGroup);
+			}
+			return params;
+		}
+
 	}]);
