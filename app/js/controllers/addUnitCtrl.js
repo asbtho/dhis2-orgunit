@@ -4,8 +4,8 @@ angular.module('orgunitmanager')
 		$scope.newOrg = {};
 
 		angular.element('.datepicker').pickadate({
-			selectMonths: true, // Creates a dropdown to control month
-			selectYears: 15, // Creates a dropdown of 15 years to control year
+			selectMonths: true,
+			selectYears: 15,
 			format: 'yyyy-mm-dd'
 		});
 
@@ -17,7 +17,6 @@ angular.module('orgunitmanager')
 				openingDate: $scope.newOrg.openingDate,
 				description: $scope.newOrg.description,
 				comment: $scope.newOrg.comment,
-				//really the way so save lat and long?
 				coordinates: "[" + $scope.newOrg.latitude + "," + $scope.newOrg.longitude + "]",
 				url: $scope.newOrg.url,
 				contactPerson: $scope.newOrg.contactPerson,

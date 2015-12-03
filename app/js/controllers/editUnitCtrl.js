@@ -4,8 +4,8 @@ angular.module('orgunitmanager')
 		$scope.unitToEdit = {};
 
 		angular.element('.datepicker').pickadate({
-			selectMonths: true, // Creates a dropdown to control month
-			selectYears: 15, // Creates a dropdown of 15 years to control year
+			selectMonths: true,
+			selectYears: 15,
 			format: 'yyyy-mm-dd',
 			formatSubmit: 'yyyy/mm/dd'
 		});
