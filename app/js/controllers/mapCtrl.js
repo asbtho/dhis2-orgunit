@@ -40,7 +40,6 @@ angular.module('orgunitmanager')
 			});
 		});
 
-		//maake a function for creating maarkers
 		$scope.$watch(function () {
 			return orgDetails;
 		}, function (newValue, oldValue) {
@@ -67,7 +66,7 @@ angular.module('orgunitmanager')
 					focus: true,
 					draggable: false,
 				}
-			}
+			};
 			$scope.markers.currentMark = markerForOrgUnit.markerDetails;
 			newCenter = {
 				lat: markerForOrgUnit.markerDetails.lat,
@@ -95,7 +94,7 @@ angular.module('orgunitmanager')
 					message: name,
 					focus: true,
 					draggable: false
-				}
+				};
 				currentMark["m" + i] = marker;
 				path.p1.latlngs.push({ lat: coordsArray[0][0][i][0], lng: coordsArray[0][0][i][1] });
 			}
@@ -115,7 +114,6 @@ angular.module('orgunitmanager')
 		}
 
 		$scope.$on('addNewClick', function (event, data) {
-			console.log(data);
 			$timeout(function () {
 				angular.element('ul.tabs').tabs('select_tab', 'add-window');
 				newUnitCoords = {
@@ -126,6 +124,7 @@ angular.module('orgunitmanager')
 		});
 
 		//TODO: handle polygons
+		//TODO: click marker -> open details
 		$scope.$watch(function () {
 			return searchOrgMarkers;
 		}, function (newVal, oldVal) {
