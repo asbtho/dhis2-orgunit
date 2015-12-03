@@ -19,15 +19,16 @@ angular.module('orgunitmanager')
 			$scope.findMeClick = function () {
 				$scope.findMeClicked = !$scope.findMeClicked;
 				alert('Find me clicked!');
+				addNewMarker();
 			};
 		
 			//Add new unit on map click
 			
 			//Add new marker
 			function addNewMarker() {
-				$scope.markerArray.push(createNewMarker("testmarker", $scope.map.bounds, -4, 20));
+					$scope.markerArray.push(createNewMarker("testmarker", $scope.map.bounds, -4, 20));
 			};
-
+			
 			var createNewMarker = function (value, bounds, longitude, latitude, idKey) {
 				if (idKey == null) {
 					idKey = "id";
