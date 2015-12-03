@@ -49,53 +49,65 @@ angular.module('orgunitmanager')
 			if (newValue.coordinates) {
 				var coordsArray = JSON.parse(newValue.coordinates);
 				if (coordsArray.length == 2) {
-					var markerForOrgUnit = {
-						markerDetails: {
-							lat: coordsArray[0],
-							lng: coordsArray[1],
-							message: newValue.name,
-							focus: true,
-							draggable: false,
-						}
-					}
-					$scope.markers.currentMark = markerForOrgUnit.markerDetails;
-					newCenter = {
-						lat: markerForOrgUnit.markerDetails.lat,
-						lng: markerForOrgUnit.markerDetails.lng,
-						zoom: 5
-					};
+					newCenter = singleMarker(newValue.name, coordsArray);
 				} else {
-					var currentMark = {};
-					var path = {
-						p1: {
-							stroke: false,
-							fillColor: '#2196F3',
-							type: 'polygon',
-							latlngs: []
-						}
-					};
-					for (var i = 0; i < coordsArray[0][0].length; i++) {
-						var marker = {
-							lat: coordsArray[0][0][i][0],
-							lng: coordsArray[0][0][i][1],
-							message: newValue.name,
-							focus: true,
-							draggable: false
-						}
-						currentMark["m" + i] = marker;
-						path.p1.latlngs.push({ lat: coordsArray[0][0][i][0], lng: coordsArray[0][0][i][1] });
-					}
-					$scope.markers = currentMark;
-					$scope.paths = path;
-					newCenter = {
-						lat: coordsArray[0][0][0][0],
-						lng: coordsArray[0][0][0][1],
-						zoom: 5
-					}
+					newCenter = polygonMarker(newValue.name, coordsArray);
 				}
 				$scope.center = newCenter;
 			}
 		});
+
+		function singleMarker(name, coordsArray) {
+			var newCenter = {};
+			var markerForOrgUnit = {
+				markerDetails: {
+					lat: coordsArray[0],
+					lng: coordsArray[1],
+					message: name,
+					focus: true,
+					draggable: false,
+				}
+			}
+			$scope.markers.currentMark = markerForOrgUnit.markerDetails;
+			newCenter = {
+				lat: markerForOrgUnit.markerDetails.lat,
+				lng: markerForOrgUnit.markerDetails.lng,
+				zoom: 5
+			};
+			return newCenter;
+		}
+
+		function polygonMarker(name, coordsArray) {
+			var newCenter = {};
+			var currentMark = {};
+			var path = {
+				p1: {
+					stroke: false,
+					fillColor: '#2196F3',
+					type: 'polygon',
+					latlngs: []
+				}
+			};
+			for (var i = 0; i < coordsArray[0][0].length; i++) {
+				var marker = {
+					lat: coordsArray[0][0][i][0],
+					lng: coordsArray[0][0][i][1],
+					message: name,
+					focus: true,
+					draggable: false
+				}
+				currentMark["m" + i] = marker;
+				path.p1.latlngs.push({ lat: coordsArray[0][0][i][0], lng: coordsArray[0][0][i][1] });
+			}
+			$scope.markers = currentMark;
+			$scope.paths = path;
+			newCenter = {
+				lat: coordsArray[0][0][0][0],
+				lng: coordsArray[0][0][0][1],
+				zoom: 5
+			}
+			return newCenter;
+		}
 
 		function clearMap() {
 			$scope.markers = {};

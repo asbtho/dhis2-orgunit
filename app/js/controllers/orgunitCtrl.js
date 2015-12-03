@@ -3,7 +3,7 @@ var orgDetails = {};
 var searchOrgMarkers = {};
 
 angular.module('orgunitmanager')
-	.controller('orgunitCtrl', ['$scope', 'orgfactory', '$state', function ($scope, orgfactory, $state) {
+	.controller('orgunitCtrl', ['$scope', 'orgfactory', '$state', '$window', function ($scope, orgfactory, $state, $window) {
 
 		$scope.orgLevels = {};
 		$scope.orgGroups = {};
@@ -113,6 +113,17 @@ angular.module('orgunitmanager')
 			//$scope.selectedGroup = "";
 			$scope.getSearchResult();
 		}*/
+		
+		//Function to get location
+		$scope.findGeoLocation = function () {
+			$window.navigator.geolocation.getCurrentPosition(callback);
+		}
+		function callback(position) {
+			newUnitCoords = {
+				lat: position.coords.latitude,
+				lng: position.coords.longitude
+			}
+		}
 
 		function getParams() {
 			var params = [];
