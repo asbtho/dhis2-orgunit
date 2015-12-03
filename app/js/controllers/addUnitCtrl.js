@@ -25,11 +25,19 @@ angular.module('orgunitmanager')
 				phoneNumber: $scope.newOrg.contactPhone
 			};
 
-			orgfactory.addOrgUnit(newUnitAsJSON)
-				.success(function (result) {
-					$scope.newOrg = {};
-					Materialize.toast('Success', 4000);
-				});
+			orgfactory.addOrgUnit(newUnitAsJSON).success(function (result) {
+				$scope.newOrg = {};
+				Materialize.toast('Success', 4000);
+			});
 		}
+		
+		$scope.$watch(function() {
+			return newUnitCoords;
+		}, function(newVal, oldVal) {
+			console.log("watching newUnitCoords");
+			console.log(newVal);
+			$scope.newOrg.latitude = newVal.lat;
+			$scope.newOrg.longitude = newVal.lng;
+		});
 
 	}]);
