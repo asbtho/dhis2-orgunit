@@ -1,5 +1,5 @@
 angular.module('orgunitmanager')
-	.controller('mapCtrl', ['$scope', function ($scope) {
+	.controller('mapCtrl', ['$scope', '$timeout', function ($scope, $timeout) {
 		angular.extend($scope, {
 			center: {
 				lat: 40.095,
@@ -31,6 +31,7 @@ angular.module('orgunitmanager')
 				}
 			}
 			$scope.markers.currentMark = newMarker.markerDetails;
+			$scope.$broadcast('addNewClick');
 		});
 
 		//maake a function for creating maarkers
@@ -93,4 +94,10 @@ angular.module('orgunitmanager')
 			$scope.markers = {};
 			$scope.paths = {};
 		}
+
+		$scope.$on('addNewClick', function () {
+			$timeout(function () {
+				angular.element('ul.tabs').tabs('select_tab', 'add-window');
+			});
+		})
 	}]);
