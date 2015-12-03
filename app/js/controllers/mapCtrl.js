@@ -20,7 +20,7 @@ angular.module('orgunitmanager')
 			},
 			paths: {}
 		});
-		
+
 		$scope.$on('leafletDirectiveMap.click', function (event, args) {
 			clearMap();
 			var clickEvent = args.leafletEvent;
@@ -30,7 +30,7 @@ angular.module('orgunitmanager')
 					lng: clickEvent.latlng.lng,
 					message: 'Add new unit',
 					focus: true,
-					draggable: true
+					draggable: false
 				}
 			}
 			$scope.markers.currentMark = newMarker.markerDetails;
@@ -96,7 +96,7 @@ angular.module('orgunitmanager')
 				$scope.center = newCenter;
 			}
 		});
-		
+
 		function clearMap() {
 			$scope.markers = {};
 			$scope.paths = {};
@@ -111,5 +111,27 @@ angular.module('orgunitmanager')
 					lng: data.lng
 				}
 			});
-		})
+		});
+
+		//TODO: handle polygons
+		$scope.$watch(function () {
+			return searchOrgMarkers;
+		}, function (newVal, oldVal) {
+			clearMap();
+			var searchMarkers = {};
+			for (var key in newVal) {
+				if (newVal[key].coordinates) {
+					var latLng = JSON.parse(newVal[key].coordinates);
+					var marker = {
+						lat: latLng[0],
+						lng: latLng[1],
+						message: newVal[key].name,
+						focus: true,
+						draggable: false
+					}
+					searchMarkers[key] = marker;
+				}
+			}
+			$scope.markers = searchMarkers;
+		});
 	}]);

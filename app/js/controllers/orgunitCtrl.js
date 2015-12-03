@@ -1,6 +1,6 @@
 var urlBase = "";
 var orgDetails = {};
-var orgMarkers = {};
+var searchOrgMarkers = {};
 
 angular.module('orgunitmanager')
 	.controller('orgunitCtrl', ['$scope', 'orgfactory', '$state', function ($scope, orgfactory, $state) {
@@ -100,6 +100,7 @@ angular.module('orgunitmanager')
 				$scope.numberOfPages = new Array(result.pager.pageCount);
 				$scope.activePage = 1;
 				$scope.$broadcast('orgunitsloaded');
+				searchOrgMarkers = result.organisationUnits;
 			}).error(function (error) {
 				console.log(error);
 			});
@@ -127,6 +128,8 @@ angular.module('orgunitmanager')
 			if ($scope.selectedGroup) {
 				params.push('filter=organisationUnitGroups.id:eq:' + $scope.selectedGroup);
 			}
+			params.push("fields=name,href,id,coordinates");
+			
 			return params;
 		}
 	}]);
