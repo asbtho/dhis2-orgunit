@@ -25,15 +25,15 @@ angular.module('orgunitmanager')
 				markerDetails: {
 					lat: clickEvent.latlng.lat,
 					lng: clickEvent.latlng.lng,
-					message: 'Do you want to add a new unit here?',
+					message: 'Add new unit',
 					focus: true,
 					draggable: true
 				}
 			}
 			$scope.markers.currentMark = newMarker.markerDetails;
-			console.log($scope.markers);
 		});
 
+		//maake a function for creating maarkers
 		$scope.$watch(function () {
 			return orgDetails;
 		}, function (newValue, oldValue) {
@@ -46,9 +46,9 @@ angular.module('orgunitmanager')
 						markerDetails: {
 							lat: coordsArray[0],
 							lng: coordsArray[1],
-							message: 'details',
+							message: newValue.name,
 							focus: true,
-							draggable: false
+							draggable: false,
 						}
 					}
 					$scope.markers.currentMark = markerForOrgUnit.markerDetails;
@@ -71,7 +71,7 @@ angular.module('orgunitmanager')
 						var marker = {
 							lat: coordsArray[0][0][i][0],
 							lng: coordsArray[0][0][i][1],
-							message: 'details',
+							message: newValue.name,
 							focus: true,
 							draggable: false
 						}
