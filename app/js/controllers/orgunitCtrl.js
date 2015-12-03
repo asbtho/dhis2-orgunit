@@ -1,4 +1,5 @@
 var urlBase = "";
+var findMeCoords = {};
 var orgDetails = {};
 var orgMarkers = {};
 
@@ -118,6 +119,10 @@ angular.module('orgunitmanager')
 			$window.navigator.geolocation.getCurrentPosition(callback);
 		}
 		function callback(position) {
+			findMeCoords = {
+				lat: position.coords.latitude,
+				lng: position.coords.longitude
+			}
 			newUnitCoords = {
 				lat: position.coords.latitude,
 				lng: position.coords.longitude

@@ -56,6 +56,21 @@ angular.module('orgunitmanager')
 				$scope.center = newCenter;
 			}
 		});
+		
+		//Watcher function for geolocation
+		$scope.$watch(function () {
+			return findMeCoords;
+		}, function (newVal, oldVal) {
+			if (newVal.lat) {
+				clearMap();
+				var newCenter = {};
+				var coordsArray = {};
+				coordsArray[0] = newVal.lat;
+				coordsArray[1] = newVal.lng;
+				newCenter = singleMarker("Add new", coordsArray);
+				$scope.center = newCenter;
+			}
+		});
 
 		function singleMarker(name, coordsArray) {
 			var newCenter = {};
