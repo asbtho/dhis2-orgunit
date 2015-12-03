@@ -1,4 +1,4 @@
-angular.module('orgunitmanager', ['ui.router', 'leaflet-directive'])
+angular.module('orgunitmanager', ['ui.router', 'leaflet-directive', 'sticky'])
     .config(function ($stateProvider, $urlRouterProvider) {
         $urlRouterProvider.otherwise("search");
         $stateProvider

@@ -5,6 +5,11 @@ nav {
   margin-bottom: 10px; }
 
 .map {
-  height: 1000px; }
+  height: 1000px; 
+}
+
+.mapsmall {
+  height: 600px; 
+}
 
 /*# sourceMappingURL=style.css.map */
