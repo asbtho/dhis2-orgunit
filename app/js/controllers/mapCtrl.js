@@ -1,5 +1,7 @@
+var newUnitCoords = {};
+
 angular.module('orgunitmanager')
-	.controller('mapCtrl', ['$scope', function ($scope) {
+	.controller('mapCtrl', ['$scope', '$timeout', function ($scope, $timeout) {
 		angular.extend($scope, {
 			center: {
 				lat: 40.095,
@@ -18,6 +20,7 @@ angular.module('orgunitmanager')
 			},
 			paths: {}
 		});
+		
 		$scope.$on('leafletDirectiveMap.click', function (event, args) {
 			clearMap();
 			var clickEvent = args.leafletEvent;
@@ -31,6 +34,10 @@ angular.module('orgunitmanager')
 				}
 			}
 			$scope.markers.currentMark = newMarker.markerDetails;
+			$scope.$broadcast('addNewClick', {
+				lat: clickEvent.latlng.lat,
+				lng: clickEvent.latlng.lng
+			});
 		});
 
 		//maake a function for creating maarkers
@@ -89,8 +96,20 @@ angular.module('orgunitmanager')
 				$scope.center = newCenter;
 			}
 		});
+		
 		function clearMap() {
 			$scope.markers = {};
 			$scope.paths = {};
 		}
+
+		$scope.$on('addNewClick', function (event, data) {
+			console.log(data);
+			$timeout(function () {
+				angular.element('ul.tabs').tabs('select_tab', 'add-window');
+				newUnitCoords = {
+					lat: data.lat,
+					lng: data.lng
+				}
+			});
+		})
 	}]);
