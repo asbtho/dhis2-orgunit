@@ -1,5 +1,6 @@
 var urlBase = "";
 var orgDetails = {};
+var orgMarkers = {};
 
 angular.module('orgunitmanager')
 	.controller('orgunitCtrl', ['$scope', 'orgfactory', '$state', function ($scope, orgfactory, $state) {

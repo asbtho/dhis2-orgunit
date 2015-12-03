@@ -34,8 +34,6 @@ angular.module('orgunitmanager')
 		$scope.$watch(function() {
 			return newUnitCoords;
 		}, function(newVal, oldVal) {
-			console.log("watching newUnitCoords");
-			console.log(newVal);
 			$scope.newOrg.latitude = newVal.lat;
 			$scope.newOrg.longitude = newVal.lng;
 		});
