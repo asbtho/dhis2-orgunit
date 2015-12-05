@@ -138,27 +138,27 @@ angular.module('orgunitmanager')
 			return searchOrgMarkers;
 		}, function (newVal, oldVal) {
 			clearMap();
-			console.log(newVal);
 			var searchMarkers = {};
+			var searchPaths = {};
+			var marker = {};
 			for (var key in newVal) {
-				if (newVal[key].coordinates == 2) {
+				if (newVal[key].hasOwnProperty('coordinates')) {
 					var latLng = JSON.parse(newVal[key].coordinates);
 					var markerJSON = {
 						name: newVal[key].name,
 						coordsArray: latLng,
 					};
-					/*var marker = {
-						lat: latLng[0],
-						lng: latLng[1],
-						message: newVal[key].name,
-						focus: true,
-						draggable: false
-					}*/
-					searchMarkers[key] = marker;
-				} else {
-
+					if (markerJSON.coordsArray.length == 2) {
+						marker = singleMarker(markerJSON);
+						searchMarkers[key] = marker;
+					} else {
+						marker = polygonMarker(markerJSON);
+						searchMarkers[key] = marker;
+						searchPaths[key] = marker.paths;
+					}
 				}
 			}
 			$scope.markers = searchMarkers;
+			$scope.paths = searchPaths;
 		});
 	}]);
