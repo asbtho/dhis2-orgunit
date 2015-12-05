@@ -1,0 +1,62 @@
+<div ng-init="initEdit()">
+	<h5 class="center">Edit unit</h5>
+	<div class="row">
+		<form name="editForm" class="col s12">
+			<div class="row">
+				<h6>Details</h6>
+				<div class="input-field col s12 m6">
+					<input id="org_name" type="text" ng-model="unitToEdit.name" required>
+					<label for="org_name" class="active">Name</label>
+				</div>
+				<div class="input-field col s12 m6">
+					<input id="short_name" type="text" ng-model="unitToEdit.shortName" required>
+					<label for="short_name" class="active">Short Name</label>
+				</div>
+				<div class="input-field col s12">
+					<textarea id="org_description" class="materialize-textarea" ng-model="unitToEdit.description"></textarea>
+					<label for="org_description" class="active">Description</label>
+				</div>
+				<div class="input-field col s12 m6">
+					<input id="org_code" type="text" ng-model="unitToEdit.code">
+					<label for="org_code" class="active">Code</label>
+				</div>
+				<div class="input-field col s12 m6">
+					<input id="org_url" type="url" ng-model="unitToEdit.url" class="validate">
+					<label for="org_url" class="active">URL</label>
+				</div>
+				<div class="input-field col s12">
+					<textarea id="org_comment" class="materialize-textarea" ng-model="unitToEdit.comment"></textarea>
+					<label for="org_comment" class="active">Comment</label>
+				</div>
+				<div class="col s12 m6">
+					<label for="org_opening_date">Opening Date</label>
+					<input id="org_opening_date" type="date" class="datepicker" ng-model="unitToEdit.openingDate" required>
+				</div>
+				<div class="col s12 m6">
+					<label for="org_closed_date">Closed Date</label>
+					<input id="org_closed_date" type="date" class="datepicker" ng-model="unitToEdit.closedDate">
+				</div>
+			</div>
+			<div class="row">
+				<h6>Contact information</h6>
+				<div class="input-field col s12 m6">
+					<input id="org_contact_person" type="text" ng-model="unitToEdit.contactPerson">
+					<label for="org_contact_person" class="active">Contact person</label>
+				</div>
+				<div class="input-field col s12 m6">
+					<input id="contact_address" type="text" ng-model="unitToEdit.address">
+					<label for="contact_address" class="active">Address</label>
+				</div>
+				<div class="input-field col s12 m6">
+					<input id="contact_email" type="email" ng-model="unitToEdit.email" class="validate">
+					<label for="contact_email" class="active">Email</label>
+				</div>
+				<div class="input-field col s12 m6">
+					<input id="contact_phone" type="tel" ng-model="unitToEdit.phoneNumber">
+					<label for="contact_phone" class="active">Phone number</label>
+				</div>
+			</div>
+			<button class="btn waves-effect waves-light" type="submit" name="edit_org_unit" ng-click="editUnit()" ng-disabled="editForm.$invalid">Confirm</button>
+		</form>
+	</div>
+</div>

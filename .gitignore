@@ -36,3 +36,5 @@ typings
 
 # Ignoring .zip files #
 *.zip
+
+.vscode/

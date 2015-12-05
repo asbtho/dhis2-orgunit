@@ -1,16 +1,92 @@
 <div>
-	<input type="text" placeholder="Search">
-	<ul class="collapsible" data-collapsible="accordion">
-		<li ng-repeat="unit in orgunits" ng-click="getOrgDetails(unit.id)">
-			<div class="collapsible-header">{{ unit.name }}</div>
-			<div class="collapsible-body">
-				<!-- directive? -->
-				<p>
-					Opening Date: {{ orgdetails.openingDate | date }},
-					<br> District: {{ orgdetails.parent.name }},
-					<br> Unit Code: {{ orgdetails.code }}
-				</p>
+	<div class="row">
+		<form>
+			<input type="text" placeholder="Search" class="col s12" ng-change="getSearchResult()" ng-model="searchPhrase">
+			<!-- <a class="col s1 center" href="#" ng-click="clearSearch()"><i class="material-icons">clear</i></a> -->
+			<div class="input-field col s12 m6">
+				<select ng-model="selectedLevel" ng-change="getSearchResult()">
+					<option value="" selected>Choose level</option>
+					<option ng-repeat="level in orgLevels" value="{{level.level}}">{{level.name}}</option>
+				</select>
+				<label>Level</label>
 			</div>
-		</li>
-	</ul>
+			<div class="input-field col s12 m6">
+				<select ng-model="selectedGroup" ng-change="getSearchResult()">
+					<option value="" selected>Choose group</option>
+					<option ng-repeat="group in orgGroups" value="{{group.id}}">{{group.name}}</option>
+				</select>
+				<label>Group</label>
+			</div>
+		</form>
+	</div>
+	<div class="row">
+		<ul class="collapsible" data-collapsible="accordion">
+			<li ng-repeat="unit in orgunits" ng-click="getOrgDetails(unit.id)">
+				<div class="collapsible-header">{{unit.name}}</div>
+				<div class="collapsible-body">
+					<br>
+					<div class="row descriptions">
+						<div class="col s12 m4">
+							<b>Name:</b>
+							<br>{{orgdetails.name}}
+						</div>
+						<div class="col s12 m4">
+							<b>Short name:</b>
+							<br>{{orgdetails.shortName}}
+						</div>
+						<div class="col s12 m4">
+							<b>Code:</b>
+							<br>{{orgdetails.code}}
+						</div>
+						<div class="col s12 m4">
+							<b>Opening date:</b>
+							<br>{{orgdetails.openingDate}}
+						</div>
+						<div class="col s12 m4">
+							<b>Closed date:</b>
+							<br>{{orgdetails.closedDate}}
+						</div>
+						<div class="col s12 m4">
+							<b>Registers date:</b>
+							<div ng-switch on="orgdetails.active">
+								<div ng-switch-when="true">
+									Yes
+								</div>
+								<div ng-switch-default>
+									No
+								</div>
+							</div>
+						</div>
+						<div class="col s12 m4">
+							<b>Last updated:</b>
+							<br>{{orgdetails.lastUpdated}}
+						</div>
+						<div class="col s12 m4">
+							<b>Created by:</b>
+							<br>{{orgdetails.user.name}}
+						</div>
+						<div class="col s12 m4">
+							<b>ID:</b>
+							<br>{{orgdetails.id}}
+						</div>
+						<div class="col s12 m8">
+							<b>URL:</b>
+							<br>{{orgdetails.url}}
+						</div>
+						<div class="col s12 m8">
+							<b>Description:</b>
+							<br>{{orgdetails.description}}
+						</div>
+						<div class="col s12 m8">
+							<b>Comment:</b>
+							<br>{{orgdetails.comment}}
+						</div>
+						<div class="col s12">
+							<a class="waves-effect waves-light btn" ng-click="editOrgDetails(orgdetails)">Edit</a>
+						</div>
+					</div>
+				</div>
+			</li>
+		</ul>
+	</div>
 </div>
