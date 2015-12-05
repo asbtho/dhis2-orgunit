@@ -31,7 +31,7 @@ angular.module('orgunitmanager')
 					lng: clickEvent.latlng.lng,
 					message: 'Add new unit',
 					focus: true,
-					draggable: false
+					draggable: true
 				}
 			}
 			$scope.markers.currentMark = newMarker.markerDetails;
@@ -40,6 +40,15 @@ angular.module('orgunitmanager')
 				lng: clickEvent.latlng.lng
 			});
 		});
+
+		$scope.$on('leafletDirectiveMarker.dragend', function (event, args) {
+			var dragevent = args.leafletEvent;
+			$scope.$broadcast('addNewClick', {
+				lat: dragevent.target._latlng.lat,
+				lng: dragevent.target._latlng.lat
+			});
+		});
+
 
 		$scope.$watch(function () {
 			return orgDetails;
