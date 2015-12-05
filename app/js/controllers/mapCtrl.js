@@ -95,6 +95,7 @@ angular.module('orgunitmanager')
 				};
 				var markers = singleMarker(markerJSON);
 				$scope.markers.currentMark = markers;
+				centerOnCurrentMarker();
 			}
 		});
 
@@ -110,6 +111,37 @@ angular.module('orgunitmanager')
 				}
 			};
 			return markerForOrgUnit.markerDetails;
+		}
+
+		function centerOnCurrentMarker() {
+			var latitude = $scope.markers.currentMark.lat;
+			var longitude = $scope.markers.currentMark.lng;
+			angular.extend($scope, {
+				center: {
+					lat: latitude,
+					lng: longitude,
+					zoom: 8
+				}
+			});
+		}
+
+		function centerMapOn(latitude, longitude, zoom) {
+			if (zoom !== null) {
+				angular.extend($scope, {
+					center: {
+						lat: latitude,
+						lng: longitude,
+						zoom: zoom
+					}
+				});
+			} else {
+				angular.extend($scope, {
+					center: {
+						lat: latitude,
+						lng: longitude
+					}
+				});
+			}
 		}
 
 		function polygonMarker(markerJSON) {
