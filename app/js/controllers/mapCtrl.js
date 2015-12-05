@@ -49,6 +49,14 @@ angular.module('orgunitmanager')
 			});
 		});
 
+		//critical bug needs fix, sometimes wrong info
+		$scope.$on('leafletDirectiveMarker.click', function (event, args) {
+			var orgId = args.model.orgId;
+			console.log(args.model);
+			$timeout(function () {
+				angular.element('#' + orgId).trigger('click');
+			});
+		});
 
 		$scope.$watch(function () {
 			return orgDetails;
@@ -60,6 +68,7 @@ angular.module('orgunitmanager')
 				var markerJSON = {
 					name: newValue.name,
 					coordsArray: coordsArray,
+					orgId: newValue.id
 				};
 				if (coordsArray.length == 2) {
 					markers = singleMarker(markerJSON);
@@ -97,6 +106,7 @@ angular.module('orgunitmanager')
 					message: markerJSON.name,
 					focus: true,
 					draggable: false,
+					orgId: markerJSON.orgId
 				}
 			};
 			return markerForOrgUnit.markerDetails;
@@ -118,7 +128,8 @@ angular.module('orgunitmanager')
 					lng: markerJSON.coordsArray[0][0][i][1],
 					message: markerJSON.name,
 					focus: true,
-					draggable: false
+					draggable: false,
+					orgId: markerJSON.orgId
 				};
 				currentMark["m" + i] = marker;
 				path.p1.latlngs.push({ lat: markerJSON.coordsArray[0][0][i][0], lng: markerJSON.coordsArray[0][0][i][1] });
@@ -154,6 +165,7 @@ angular.module('orgunitmanager')
 					var markerJSON = {
 						name: newVal[key].name,
 						coordsArray: latLng,
+						orgId: newVal[key].id
 					};
 					if (markerJSON.coordsArray.length == 2) {
 						marker = singleMarker(markerJSON);
