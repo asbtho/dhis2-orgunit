@@ -44,55 +44,55 @@ angular.module('orgunitmanager')
 			return orgDetails;
 		}, function (newValue, oldValue) {
 			clearMap();
-			var newCenter = {};
+			var markers = {};
 			if (newValue.coordinates) {
 				var coordsArray = JSON.parse(newValue.coordinates);
+				var markerJSON = {
+					name: newValue.name,
+					coordsArray: coordsArray,
+				};
 				if (coordsArray.length == 2) {
-					newCenter = singleMarker(newValue.name, coordsArray);
+					markers = singleMarker(markerJSON);
+					$scope.markers.currentMark = markers;
 				} else {
-					newCenter = polygonMarker(newValue.name, coordsArray);
+					markers = polygonMarker(markerJSON);
+					$scope.markers = markers.marks;
+					$scope.paths = markers.paths;
 				}
-				$scope.center = newCenter;
 			}
 		});
-		
-		//Watcher function for geolocation
+
 		$scope.$watch(function () {
 			return findMeCoords;
 		}, function (newVal, oldVal) {
 			if (newVal.lat) {
 				clearMap();
-				var newCenter = {};
 				var coordsArray = {};
 				coordsArray[0] = newVal.lat;
 				coordsArray[1] = newVal.lng;
-				newCenter = singleMarker("Add new", coordsArray);
-				$scope.center = newCenter;
+				var markerJSON = {
+					name: "Add new unit",
+					coordsArray: coordsArray,
+				};
+				var markers = singleMarker(markerJSON);
+				$scope.markers.currentMark = markers;
 			}
 		});
 
-		function singleMarker(name, coordsArray) {
-			var newCenter = {};
+		function singleMarker(markerJSON) {
 			var markerForOrgUnit = {
 				markerDetails: {
-					lat: coordsArray[0],
-					lng: coordsArray[1],
-					message: name,
+					lat: markerJSON.coordsArray[0],
+					lng: markerJSON.coordsArray[1],
+					message: markerJSON.name,
 					focus: true,
 					draggable: false,
 				}
 			};
-			$scope.markers.currentMark = markerForOrgUnit.markerDetails;
-			newCenter = {
-				lat: markerForOrgUnit.markerDetails.lat,
-				lng: markerForOrgUnit.markerDetails.lng,
-				zoom: 5
-			};
-			return newCenter;
+			return markerForOrgUnit.markerDetails;
 		}
 
-		function polygonMarker(name, coordsArray) {
-			var newCenter = {};
+		function polygonMarker(markerJSON) {
 			var currentMark = {};
 			var path = {
 				p1: {
@@ -102,25 +102,18 @@ angular.module('orgunitmanager')
 					latlngs: []
 				}
 			};
-			for (var i = 0; i < coordsArray[0][0].length; i++) {
+			for (var i = 0; i < markerJSON.coordsArray[0][0].length; i++) {
 				var marker = {
-					lat: coordsArray[0][0][i][0],
-					lng: coordsArray[0][0][i][1],
-					message: name,
+					lat: markerJSON.coordsArray[0][0][i][0],
+					lng: markerJSON.coordsArray[0][0][i][1],
+					message: markerJSON.name,
 					focus: true,
 					draggable: false
 				};
 				currentMark["m" + i] = marker;
-				path.p1.latlngs.push({ lat: coordsArray[0][0][i][0], lng: coordsArray[0][0][i][1] });
+				path.p1.latlngs.push({ lat: markerJSON.coordsArray[0][0][i][0], lng: markerJSON.coordsArray[0][0][i][1] });
 			}
-			$scope.markers = currentMark;
-			$scope.paths = path;
-			newCenter = {
-				lat: coordsArray[0][0][0][0],
-				lng: coordsArray[0][0][0][1],
-				zoom: 5
-			}
-			return newCenter;
+			return { marks: currentMark, paths: path };
 		}
 
 		function clearMap() {
@@ -140,22 +133,30 @@ angular.module('orgunitmanager')
 
 		//TODO: handle polygons
 		//TODO: click marker -> open details
+		//center?
 		$scope.$watch(function () {
 			return searchOrgMarkers;
 		}, function (newVal, oldVal) {
 			clearMap();
+			console.log(newVal);
 			var searchMarkers = {};
 			for (var key in newVal) {
-				if (newVal[key].coordinates) {
+				if (newVal[key].coordinates == 2) {
 					var latLng = JSON.parse(newVal[key].coordinates);
-					var marker = {
+					var markerJSON = {
+						name: newVal[key].name,
+						coordsArray: latLng,
+					};
+					/*var marker = {
 						lat: latLng[0],
 						lng: latLng[1],
 						message: newVal[key].name,
 						focus: true,
 						draggable: false
-					}
+					}*/
 					searchMarkers[key] = marker;
+				} else {
+
 				}
 			}
 			$scope.markers = searchMarkers;
