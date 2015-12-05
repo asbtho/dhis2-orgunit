@@ -70,23 +70,30 @@ angular.module('orgunitmanager')
 
         $scope.goToPage = function (page) {
 			$scope.activePage = page;
-			orgfactory.getPageUnits(page, getParams())
-				.success(function (result) {
-					$scope.orgunits = result.organisationUnits;
-					$scope.$broadcast('orgunitsloaded');
-				})
-				.error(function (error) {
-					console.log(error);
-				});
+			var params = getParams();
+			orgfactory.getPageUnits(page, params).success(function (result) {
+				$scope.orgunits = result.organisationUnits;
+				$scope.$broadcast('orgunitsloaded');
+				if (params.length == 1) {
+					timeToClearMap = true;
+				}  else {
+					searchOrgMarkers = result.organisationUnits;
+				}
+			}).error(function (error) {
+				console.log(error);
+			});
         }
 
 		$scope.editOrgDetails = function (currentDetails) {
-			$state.go('home.edit', { unitCurrentDetails: currentDetails });
+			$state.go('home.edit', {
+				unitCurrentDetails: currentDetails
+			});
 		}
 
 		$scope.goToState = function (stateName) {
 			switch (stateName) {
 				case 'search':
+					timeToClearMap = true;
 					$state.go('home.search');
 					break;
 				case 'add':
@@ -96,12 +103,17 @@ angular.module('orgunitmanager')
 		}
 
 		$scope.getSearchResult = function () {
-			orgfactory.getSearchResults(getParams()).success(function (result) {
+			var params = getParams();
+			orgfactory.getSearchResults(params).success(function (result) {
 				$scope.orgunits = result.organisationUnits;
 				$scope.numberOfPages = new Array(result.pager.pageCount);
 				$scope.activePage = 1;
 				$scope.$broadcast('orgunitsloaded');
-				searchOrgMarkers = result.organisationUnits;
+				if (params.length == 1) {
+					timeToClearMap = true;
+				} else {
+					searchOrgMarkers = result.organisationUnits;
+				}
 			}).error(function (error) {
 				console.log(error);
 			});
@@ -145,7 +157,7 @@ angular.module('orgunitmanager')
 				params.push('filter=organisationUnitGroups.id:eq:' + $scope.selectedGroup);
 			}
 			params.push("fields=name,href,id,coordinates");
-			
+
 			return params;
 		}
 	}]);

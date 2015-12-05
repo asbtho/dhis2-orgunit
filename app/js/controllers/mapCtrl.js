@@ -1,4 +1,5 @@
 var newUnitCoords = {};
+var timeToClearMap = false;
 
 angular.module('orgunitmanager')
 	.controller('mapCtrl', ['$scope', '$timeout', function ($scope, $timeout) {
@@ -156,5 +157,14 @@ angular.module('orgunitmanager')
 				}
 			}
 			$scope.markers = searchMarkers;
+		});
+
+		$scope.$watch(function () {
+			return timeToClearMap;
+		}, function (newVal, oldVal) {
+			if (newVal) {
+				clearMap();
+				timeToClearMap = false;
+			}
 		});
 	}]);
