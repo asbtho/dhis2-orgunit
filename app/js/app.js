@@ -11,7 +11,7 @@ angular.module('orgunitmanager', ['ui.router', 'leaflet-directive', 'sticky'])
             .state('home.search', {
                 url: 'search',
                 views: {
-                    'search-tab': {
+                    'tab-window': {
                         templateUrl: 'templates/searchTab.html',
                         controller: 'orgunitCtrl'
                     }
@@ -20,7 +20,7 @@ angular.module('orgunitmanager', ['ui.router', 'leaflet-directive', 'sticky'])
             .state('home.add', {
                 url: 'add',
                 views: {
-                    'add-tab': {
+                    'tab-window': {
                         templateUrl: 'templates/addUnitTab.html',
                         controller: 'addUnitCtrl'
                     }
@@ -32,7 +32,7 @@ angular.module('orgunitmanager', ['ui.router', 'leaflet-directive', 'sticky'])
                     unitCurrentDetails: null
                 },
                 views: {
-                    'search-tab': {
+                    'tab-window': {
                         templateUrl: 'templates/editUnitTab.html',
                         controller: 'editUnitCtrl'
                     }
