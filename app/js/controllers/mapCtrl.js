@@ -131,15 +131,12 @@ angular.module('orgunitmanager')
 			});
 		});
 
-		//TODO: handle polygons
 		//TODO: click marker -> open details
-		//center?
 		$scope.$watch(function () {
 			return searchOrgMarkers;
 		}, function (newVal, oldVal) {
 			clearMap();
 			var searchMarkers = {};
-			var searchPaths = {};
 			var marker = {};
 			for (var key in newVal) {
 				if (newVal[key].hasOwnProperty('coordinates')) {
@@ -152,13 +149,12 @@ angular.module('orgunitmanager')
 						marker = singleMarker(markerJSON);
 						searchMarkers[key] = marker;
 					} else {
+						//not poly because performance
 						marker = polygonMarker(markerJSON);
-						searchMarkers[key] = marker;
-						searchPaths[key] = marker.paths;
+						searchMarkers[key] = marker.marks.m0;
 					}
 				}
 			}
 			$scope.markers = searchMarkers;
-			$scope.paths = searchPaths;
 		});
 	}]);
