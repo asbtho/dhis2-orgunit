@@ -2,7 +2,7 @@ var newUnitCoords = {};
 var timeToClearMap = false;
 
 angular.module('orgunitmanager')
-	.controller('mapCtrl', ['$scope', '$timeout', function ($scope, $timeout) {
+	.controller('mapCtrl', ['$scope', '$timeout','$location', '$anchorScroll', function ($scope, $timeout, $location, $anchorScroll) {
 		angular.extend($scope, {
 			center: {
 				lat: 40.095,
@@ -52,11 +52,27 @@ angular.module('orgunitmanager')
 		//critical bug needs fix, sometimes wrong info
 		$scope.$on('leafletDirectiveMarker.click', function (event, args) {
 			var orgId = args.model.orgId;
+			
+			//this function does not run
+			gotoOrg(orgId);
+			
+			//why won't this console.log run???
+			console.log("THIS IS" + orgId);
+			
 			console.log(args.model);
 			$timeout(function () {
 				angular.element('#' + orgId).trigger('click');
 			});
 		});
+
+		function gotoOrg(orgId) {
+			// set the location.hash to the id of
+			// the element you wish to scroll to.
+			$location.hash(orgId);
+			console.log("THIS IS" + orgId);
+			// call $anchorScroll()
+			$anchorScroll();
+		};
 
 		$scope.$watch(function () {
 			return orgDetails;
