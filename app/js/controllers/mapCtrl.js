@@ -49,19 +49,13 @@ angular.module('orgunitmanager')
 			});
 		});
 
-		//critical bug needs fix, sometimes wrong info
 		$scope.$on('leafletDirectiveMarker.click', function (event, args) {
 			var orgId = args.model.orgId;
-			
-			//this function does not run
 			gotoOrg(orgId);
-			
-			//why won't this console.log run???
-			console.log("THIS IS " + orgId);
-
-			console.log(args.model);
 			$timeout(function () {
-				angular.element('#' + orgId).trigger('click');
+				if (!angular.element('#' + orgId).hasClass("active")) {
+					angular.element('#' + orgId).trigger('click');
+				}
 			});
 		});
 
@@ -69,8 +63,6 @@ angular.module('orgunitmanager')
 			// set the location.hash to the id of
 			// the element you wish to scroll to.
 			$location.hash(orgId);
-			console.log("THIS IS" + orgId);
-			// call $anchorScroll()
 			$anchorScroll();
 		};
 
@@ -181,7 +173,7 @@ angular.module('orgunitmanager')
 			for (var i = 0; i < markerJSON.coordsArray[0][0].length; i++) {
 				path.p1.latlngs.push({ lat: markerJSON.coordsArray[0][0][i][0], lng: markerJSON.coordsArray[0][0][i][1] });
 			}
-			return {marks: currentMark, paths: path};
+			return { marks: currentMark, paths: path };
 		}
 
 		function clearMap() {
