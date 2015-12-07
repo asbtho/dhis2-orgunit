@@ -181,7 +181,7 @@ angular.module('orgunitmanager')
 			for (var i = 0; i < markerJSON.coordsArray[0][0].length; i++) {
 				path.p1.latlngs.push({ lat: markerJSON.coordsArray[0][0][i][0], lng: markerJSON.coordsArray[0][0][i][1] });
 			}
-			return { marks: currentMark, paths: path };
+			return {marks: currentMark, paths: path};
 		}
 
 		function clearMap() {
