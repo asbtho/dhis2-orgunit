@@ -192,11 +192,9 @@ angular.module('orgunitmanager')
 			});
 		});
 
-		//---------------------------------------
 		$scope.$watch(function () {
 			return editMakrerCoords;
 		}, function (newVal, oldVal) {
-			console.log(newVal);
 			if (newVal.lat && newVal.lng) {
 				clearMap();
 				var markerJSON = {
@@ -206,15 +204,10 @@ angular.module('orgunitmanager')
 					focus: true,
 					draggable: false,
 				}
-				console.log("marker");
-				console.log(markerJSON);
 				$scope.markers.currentMark = markerJSON;
 				centerOnCurrentMarker();
 			}
-		});
-		//---------------------------------------
-		
-		
+		});		
 		
 		$scope.$watch(function () {
 			return searchOrgMarkers;
