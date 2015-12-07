@@ -1,6 +1,11 @@
 <div class="row" ng-init="setInitState()">
 	<div id="map-holder" class="col s12 m8" ng-controller="mapCtrl">
-		<leaflet class="map" lf-center="center" paths="paths" markers="markers"></leaflet>
+		<div class="hide-on-small-only" sticky>
+			<leaflet class="map" lf-center="center" paths="paths" markers="markers"></leaflet>
+		</div>
+		<div class="hide-on-med-and-up">
+			<leaflet class="mapsmall" lf-center="center" paths="paths" markers="markers"></leaflet>
+		</div>
 	</div>
 	<div id="fill-content" class="col s12 m4">
 		<div class="row">
@@ -11,10 +16,10 @@
 				</ul>
 			</div>
 			<div id="search-window" class="col s12">
-				<div ui-view name="search-tab"></div>
+				<div ui-view name="tab-window"></div>
 			</div>
 			<div id="add-window" class="col s12">
-				<div ui-view name="add-tab"></div>
+				<div ui-view name="tab-window"></div>
 			</div>
 		</div>
 	</div>

@@ -23,18 +23,20 @@
 				<input id="org_url" type="url" ng-model="newOrg.url" class="validate">
 				<label for="org_url">URL</label>
 			</div>
-
 			<div class="input-field col s12">
 				<textarea id="org_comment" class="materialize-textarea" ng-model="newOrg.comment"></textarea>
 				<label for="org_comment">Comment</label>
 			</div>
-			<div class="input-field col s12 m6">
+			<div class="input-field col s12 m4">
 				<input id="org_longitude" type="text" ng-model="newOrg.longitude">
-				<label for="org_longitude">Longitude</label>
+				<label for="org_longitude" class="active">Longitude</label>
 			</div>
-			<div class="input-field col s12 m6">
+			<div class="input-field col s12 m4">
 				<input id="org_latitude" type="text" ng-model="newOrg.latitude">
-				<label for="org_latitude">Latitude</label>
+				<label for="org_latitude" class="active">Latitude</label>
+			</div>
+			<div class="input-field col s12 m4">
+				<a class="waves-effect waves-light btn" ng-click="findGeoLocation()">Find me</a>
 			</div>
 			<div class="col s12">
 				<label for="org_opening_date">Opening Date</label>

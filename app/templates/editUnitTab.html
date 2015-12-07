@@ -28,6 +28,17 @@
 					<textarea id="org_comment" class="materialize-textarea" ng-model="unitToEdit.comment"></textarea>
 					<label for="org_comment" class="active">Comment</label>
 				</div>
+				<div class="input-field col s12 m4">
+					<input id="org_longitude" type="text" ng-model="unitToEdit.longitude" ng-change="moveEditMarker()">
+					<label for="org_longitude" class="active">Longitude</label>
+				</div>
+				<div class="input-field col s12 m4">
+					<input id="org_latitude" type="text" ng-model="unitToEdit.latitude" ng-change="moveEditMarker()">
+					<label for="org_latitude" class="active">Latitude</label>
+				</div>
+				<div class="input-field col s12 m4">
+					<a class="waves-effect waves-light btn" ng-click="editGeoLocationFindMe()">Find me</a>
+				</div>
 				<div class="col s12 m6">
 					<label for="org_opening_date">Opening Date</label>
 					<input id="org_opening_date" type="date" class="datepicker" ng-model="unitToEdit.openingDate" required>
