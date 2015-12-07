@@ -19,7 +19,17 @@ angular.module('orgunitmanager')
 					logic: 'emit'
 				}
 			},
-			paths: {}
+			paths: {},
+			maxbounds: {
+				northEast: {
+					lat: 90,
+					lng: 180
+				},
+				southWest: {
+					lat: -90,
+					lng: -180
+				}
+			}
 		});
 
 		$scope.$on('leafletDirectiveMap.click', function (event, args) {
