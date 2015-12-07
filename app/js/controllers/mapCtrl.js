@@ -1,4 +1,5 @@
 var newUnitCoords = {};
+var editMakrerCoords = {};
 var timeToClearMap = false;
 
 angular.module('orgunitmanager')
@@ -191,7 +192,30 @@ angular.module('orgunitmanager')
 			});
 		});
 
-		//TODO: click marker -> open details
+		//---------------------------------------
+		$scope.$watch(function () {
+			return editMakrerCoords;
+		}, function (newVal, oldVal) {
+			console.log(newVal);
+			if (newVal.lat && newVal.lng) {
+				clearMap();
+				var markerJSON = {
+					lat: parseFloat(newVal.lat),
+					lng: parseFloat(newVal.lng),
+					message: newVal.name,
+					focus: true,
+					draggable: false,
+				}
+				console.log("marker");
+				console.log(markerJSON);
+				$scope.markers.currentMark = markerJSON;
+				centerOnCurrentMarker();
+			}
+		});
+		//---------------------------------------
+		
+		
+		
 		$scope.$watch(function () {
 			return searchOrgMarkers;
 		}, function (newVal, oldVal) {
