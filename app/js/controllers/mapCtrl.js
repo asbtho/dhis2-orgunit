@@ -2,7 +2,7 @@ var newUnitCoords = {};
 var timeToClearMap = false;
 
 angular.module('orgunitmanager')
-	.controller('mapCtrl', ['$scope', '$timeout','$location', '$anchorScroll', function ($scope, $timeout, $location, $anchorScroll) {
+	.controller('mapCtrl', ['$scope', '$timeout', '$location', '$anchorScroll', function ($scope, $timeout, $location, $anchorScroll) {
 		angular.extend($scope, {
 			center: {
 				lat: 40.095,
@@ -57,8 +57,8 @@ angular.module('orgunitmanager')
 			gotoOrg(orgId);
 			
 			//why won't this console.log run???
-			console.log("THIS IS" + orgId);
-			
+			console.log("THIS IS " + orgId);
+
 			console.log(args.model);
 			$timeout(function () {
 				angular.element('#' + orgId).trigger('click');
@@ -170,16 +170,15 @@ angular.module('orgunitmanager')
 					latlngs: []
 				}
 			};
+			currentMark[markerJSON.orgId] = {
+				lat: markerJSON.coordsArray[0][0][0][0],
+				lng: markerJSON.coordsArray[0][0][0][1],
+				message: markerJSON.name,
+				focus: true,
+				draggable: false,
+				orgId: markerJSON.orgId
+			};
 			for (var i = 0; i < markerJSON.coordsArray[0][0].length; i++) {
-				var marker = {
-					lat: markerJSON.coordsArray[0][0][i][0],
-					lng: markerJSON.coordsArray[0][0][i][1],
-					message: markerJSON.name,
-					focus: true,
-					draggable: false,
-					orgId: markerJSON.orgId
-				};
-				currentMark["m" + i] = marker;
 				path.p1.latlngs.push({ lat: markerJSON.coordsArray[0][0][i][0], lng: markerJSON.coordsArray[0][0][i][1] });
 			}
 			return { marks: currentMark, paths: path };
@@ -217,14 +216,16 @@ angular.module('orgunitmanager')
 					};
 					if (markerJSON.coordsArray.length == 2) {
 						marker = singleMarker(markerJSON);
-						searchMarkers[key] = marker;
+						searchMarkers[newVal[key].id] = marker;
 					} else {
 						//not poly because performance
 						marker = polygonMarker(markerJSON);
-						searchMarkers[key] = marker.marks.m0;
+						searchMarkers[newVal[key].id] = marker.marks[markerJSON.orgId];
 					}
 				}
 			}
+			console.log("searchmarkers: ");
+			console.log(searchMarkers);
 			$scope.markers = searchMarkers;
 		});
 
