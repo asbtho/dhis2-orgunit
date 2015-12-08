@@ -67,7 +67,6 @@ angular.module('orgunitmanager')
 			}
 		};
 
-
         $scope.goToPage = function (page) {
 			$scope.activePage = page;
 			var params = getParams();
@@ -119,15 +118,6 @@ angular.module('orgunitmanager')
 			});
 		}
 
-		/*$scope.clearSearch = function () {
-			console.log("clear search");
-			$scope.searchPhrase = "";
-			//$scope.selectedLevel = "";
-			//$scope.selectedGroup = "";
-			$scope.getSearchResult();
-		}*/
-		
-		//Function to get location
 		$scope.findGeoLocation = function () {
 			$window.navigator.geolocation.getCurrentPosition(callback);
 		}
@@ -141,6 +131,8 @@ angular.module('orgunitmanager')
 				lng: position.coords.longitude
 			}
 		}
+		
+		
 
 		function getParams() {
 			var params = [];

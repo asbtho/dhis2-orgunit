@@ -250,7 +250,6 @@ angular.module('orgunitmanager')
 						marker = singleMarker(markerJSON);
 						searchMarkers[newVal[key].id] = marker;
 					} else {
-						//not poly because performance
 						marker = polygonMarker(markerJSON);
 						searchMarkers[newVal[key].id] = marker.marks[markerJSON.orgId];
 					}

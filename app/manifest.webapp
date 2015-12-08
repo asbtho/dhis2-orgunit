@@ -1,7 +1,7 @@
 {
     "version": "0.1",
-    "name": "OrgunitsAS",
-    "description": "My App is a Packaged App",
+    "name": "SimonAndBears - Organisation Unit Manager",
+    "description": "Webapp for dhis2. Organisation Unit Manager",
     "launch_path": "index.html",
     "icons": {
         "16": "/img/icons/org-logo-16.png",
