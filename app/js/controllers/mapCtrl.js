@@ -20,21 +20,44 @@ angular.module('orgunitmanager')
 					logic: 'emit'
 				}
 			},
-			paths: {}
+			paths: {},
+			maxbounds: {
+				northEast: {
+					lat: 90,
+					lng: 180
+				},
+				southWest: {
+					lat: -90,
+					lng: -180
+				}
+			}
 		});
+
+		function checkBounds(lat, lng) {
+			if (lat > 90 || lat < -90 || lng > 180 || lng < -180) {
+				return false;
+			} else {
+				return true;
+			}
+		}
 
 		$scope.$on('leafletDirectiveMap.click', function (event, args) {
 			clearMap();
 			var clickEvent = args.leafletEvent;
-			var newMarker = {
-				markerDetails: {
-					lat: clickEvent.latlng.lat,
-					lng: clickEvent.latlng.lng,
-					message: 'Add new unit',
-					focus: true,
-					draggable: true
+			if (checkBounds(clickEvent.latlng.lat, clickEvent.latlng.lng)) {
+				var newMarker = {
+					markerDetails: {
+						lat: clickEvent.latlng.lat,
+						lng: clickEvent.latlng.lng,
+						message: 'Add new unit',
+						focus: true,
+						draggable: true
+					}
 				}
+			} else {
+				alert("OUT OF BOUNDS");
 			}
+
 			$scope.markers.currentMark = newMarker.markerDetails;
 			$scope.$broadcast('addNewClick', {
 				lat: clickEvent.latlng.lat,
